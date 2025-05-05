@@ -9,9 +9,9 @@ langchain
 python-dotenv
 numpy
 pandas
-mysql-connector-python
+mysql-connector-python==9.3.0
 sqlalchemy
-mysqlclient
+# mysqlclient
 sqlparse
 
 streamlit-modal
