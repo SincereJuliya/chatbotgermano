@@ -95,21 +95,30 @@ def inject_custom_css():
             border-radius: 10px;
         }
         
-        /* Target ONLY the specific text button */
-        button[data-testid="baseButton-secondary"][aria-label="Start a new chat"] {
+        /* Target only the specific button using its key */
+        div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"] {
             background-color: #E3F2FD !important;
             border: 1px solid #BBDEFB !important;
             color: #1E4B8B !important;
-            border-radius: 8px !important;
-            padding: 10px 15px !important;
-            margin: 15px 0 !important;
-            width: 100% !important;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin: 15px 0;
+            width: 100%;
+            transition: all 0.2s ease;
         }
 
-        button[data-testid="baseButton-secondary"][aria-label="Start a new chat"]:hover {
+        /* Hover state for specific button */
+        div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"]:hover {
             background-color: #BBDEFB !important;
             color: #0D3C61 !important;
             border-color: #90CAF9 !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Active state for specific button */
+        div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"]:active {
+            background-color: #90CAF9 !important;
+            transform: translateY(1px);
         }
         
         </style>
@@ -315,12 +324,10 @@ def render_chat_area() -> None:
             # Text-styled button that shares the create_new_chat function
             st.button(
                    "Select a chat from the sidebar or start a new one using ➕",
-                    key="text_chat_trigger",
+                    key="text_chat_trigger",  # This key is used in the CSS selector
                     on_click=create_new_chat,
                     help="Start a new chat",
-                    type="secondary",
-                    # Add aria-label matching the CSS selector
-                    kwargs={"aria-label": "Start a new chat"}
+                    type="secondary"
             )
     
 
