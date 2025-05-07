@@ -98,16 +98,19 @@ def inject_custom_css():
         .clickable-text {
             color: #3B82F6 !important;
             cursor: pointer;
-            padding: 8px 12px;
+            padding: 12px;
             border-radius: 8px;
             border: 1px solid #3B82F6;
+            margin: 15px 0;
+            transition: all 0.2s;
             display: inline-block;
-            transition: all 0.3s;
-            margin: 10px 0;
         }
         .clickable-text:hover {
-            background-color: #3B82F620;
-            text-decoration: none;
+            background-color: #3B82F610;
+            transform: translateY(-1px);
+        }
+        .clickable-text:active {
+            transform: translateY(0);
         }
         
         </style>
