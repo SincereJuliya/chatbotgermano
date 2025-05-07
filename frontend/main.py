@@ -1,5 +1,6 @@
 import datetime
 import streamlit as st
+from typing import List, Dict, Optional, Any, Literal
 import streamlit.components.v1 as components
 from streamlit_modal import Modal
 
@@ -116,7 +117,7 @@ print(f"▶️ Using BACKEND_URL = {BACKEND_URL}")
 import utils
 utils.BACKEND_URL = BACKEND_URL
 
-"""# """
+"""# ChatbotGermano """
 
 def initialize_app():
     """Initialize app configuration and session state variables.
