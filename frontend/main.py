@@ -95,6 +95,20 @@ def inject_custom_css():
             border-radius: 10px;
         }
         
+        div[data-testid="stButton"] > button[kind="secondary"] {
+            background: transparent !important;
+            border: none !important;
+            color: #3B82F6 !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            text-align: left !important;
+            width: 100% !important;
+        }
+        div[data-testid="stButton"] > button[kind="secondary"]:hover {
+            background-color: #3B82F610 !important;
+            text-decoration: underline;
+        }
+        
         </style>
     """, unsafe_allow_html=True)
 
@@ -182,19 +196,7 @@ def render_sidebar() -> None:
                   st.toast(f"User profile clicked (placeholder)")
         with col_new_chat:
              if st.button("➕", key="new_chat_btn", help="Start a new chat"):
-                 # Call API to create session
-                 with st.spinner("Creating new chat..."):
-                     new_session = api_create_session()
-                 if new_session:
-                     st.session_state.chat_sessions[new_session['id']] = new_session
-                     st.session_state.current_chat_id = new_session['id']
-                     st.session_state.messages = [] # Clear messages for new chat
-                     st.session_state.show_citation_id = None # Reset modal state
-                     st.session_state.documents_cache = {} # Clear citation cache
-                     st.toast(f"Created '{new_session['title']}'")
-                     st.rerun()
-                 else:
-                     st.error("Failed to create new chat session on backend.")
+                create_new_chat()
 
         st.divider()
 
@@ -307,39 +309,15 @@ def render_chat_area() -> None:
             for i, message in enumerate(st.session_state.messages):
                 render_chat_message(message, i)
         else:
-             # Create an invisible button with a visible label
-            col1, col2 = st.columns([0.8, 0.2])
-            with col1:
-                st.markdown("""
-                    <style>
-                        .clickable-text {
-                            color: #3B82F6 !important;
-                            cursor: pointer;
-                            padding: 8px 12px;
-                            border-radius: 8px;
-                            transition: all 0.3s;
-                            display: inline-block;
-                        }
-                        .clickable-text:hover {
-                            background-color: #3B82F620;
-                            text-decoration: underline;
-                        }
-                        /* Hide the actual button */
-                        #new-chat-trigger-btn {
-                            display: none !important;
-                        }
-                    </style>
-                    <label for="new-chat-trigger-btn" class="clickable-text">
-                        Select a chat from the sidebar or start a new one using ➕
-                    </label>
-                """, unsafe_allow_html=True)
-                
-                # Hidden button that will be clicked via the label
-                if st.button("Create New Chat", 
-                           key="new-chat-trigger-btn", 
-                           help="Start a new chat",
-                           on_click=create_new_chat_callback):
-                    pass
+            # Text-styled button that shares the create_new_chat function
+            st.button(
+                "Select a chat from the sidebar or start a new one using ➕",
+                key="text_chat_trigger",
+                on_click=create_new_chat,
+                help="Start a new chat",
+                type="secondary"
+            )
+    
 
     # Separator and Chat input - Place outside the message container
     if st.session_state.current_chat_id:
@@ -367,20 +345,20 @@ def render_chat_area() -> None:
             else:
                  st.error("Failed to send message.") # API call already showed error
 
-# Add this callback function
-def create_new_chat_callback():
-    """Callback function for creating new chats"""
+def create_new_chat():
+    """Shared function for new chat creation"""
     with st.spinner("Creating new chat..."):
         new_session = api_create_session()
-        if new_session:
-            st.session_state.chat_sessions[new_session['id']] = new_session
-            st.session_state.current_chat_id = new_session['id']
-            st.session_state.messages = []
-            st.session_state.show_citation_id = None
-            st.session_state.documents_cache = {}
-            st.rerun()
-        else:
-            st.error("Failed to create new chat session")
+    if new_session:
+        st.session_state.chat_sessions[new_session['id']] = new_session
+        st.session_state.current_chat_id = new_session['id']
+        st.session_state.messages = []
+        st.session_state.show_citation_id = None
+        st.session_state.documents_cache = {}
+        st.toast(f"Created '{new_session['title']}'")
+        st.rerun()
+    else:
+        st.error("Failed to create new chat session")
 
 def display_citation_modal(modal_instance: Modal) -> None:
     """Displays the modal with citation details if show_citation_id is set."""
