@@ -95,31 +95,41 @@ def inject_custom_css():
             border-radius: 10px;
         }
         
-        /* clickable-info paragraph */
-        .clickable-info {
-            color: #3366CC;
-            font-size: 1rem;
-            font-weight: 500;
-            margin: 1rem 0 0.25rem;
-            cursor: default;
-        }
-
-        /* make the “start” button look like plain text/link */
-        #start-new-chat>button {
-            background: none;
-            border: none;
-            padding: 0;
-            color: #3366CC;
-            font-size: 1rem;
-            text-decoration: underline;
+        /* Add this new rule */
+        .clickable-text {
+            color: #3B82F6 !important;
             cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
         }
-        #start-new-chat>button:hover {
-            color: #264D99;
+        .clickable-text:hover {
+            background-color: #f0f4f8;
+            text-decoration: underline;
         }
-
+        
         </style>
     """, unsafe_allow_html=True)
+     # Add JavaScript handler
+    components.html("""
+        <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const handleClick = (event) => {
+                if (event.target.closest('.clickable-text')) {
+                    window.parent.postMessage({
+                        type: 'streamlit:component',
+                        component: 'body',
+                        data: {type: 'new_chat_click'}
+                    }, '*');
+                }
+            };
+            
+            // Add event listener to the rendered element
+            const container = parent.document.querySelectorAll('[data-testid="stAppViewContainer"]')[0];
+            container.addEventListener('click', handleClick);
+        });
+        </script>
+    """, height=0, width=0)
 
 # --- Configuration ---
 _raw_url = st.secrets.get("API_URL", "").strip()
@@ -330,26 +340,39 @@ def render_chat_area() -> None:
             for i, message in enumerate(st.session_state.messages):
                 render_chat_message(message, i)
         else:
-             # show styled instructions
-            st.markdown(
-                "<p class='clickable-info'>Select a chat from the sidebar or start a new one using ➕.</p>",
-                unsafe_allow_html=True,
-            )
-            # invisible-but-clickable button
-            if st.button("Start a new chat ➕", key="start-new-chat"):
-                # exactly the same logic you already have for the ➕ in the sidebar:
-                with st.spinner("Creating new chat..."):
-                    new_session = api_create_session()
-                if new_session:
-                    st.session_state.chat_sessions[new_session['id']] = new_session
-                    st.session_state.current_chat_id = new_session['id']
-                    st.session_state.messages = []
-                    st.session_state.show_citation_id = None
-                    st.session_state.documents_cache = {}
-                    st.toast(f"Created '{new_session['title']}'")
-                    st.experimental_rerun()
-                else:
-                    st.error("Failed to create new chat session on backend.")
+            # Make the text clickable using markdown with HTML
+            st.markdown("""
+                <style>
+                    .clickable-text {
+                        color: #3B82F6 !important;
+                        cursor: pointer;
+                        text-decoration: none;
+                    }
+                    .clickable-text:hover {
+                        text-decoration: underline;
+                    }
+                </style>
+                
+                <div onclick="window.streamlit:componentData.emit('new_chat_click', {})" 
+                     class="clickable-text">
+                    Select a chat from the sidebar or start a new one using ➕
+                </div>
+            """, unsafe_allow_html=True)
+            
+    # Handle new chat creation if triggered
+    if "new_chat_click" in st.session_state:
+        del st.session_state.new_chat_click  # Clear the trigger
+        
+        # Reuse the existing new chat logic from the sidebar button
+        with st.spinner("Creating new chat..."):
+            new_session = api_create_session()
+            if new_session:
+                st.session_state.chat_sessions[new_session['id']] = new_session
+                st.session_state.current_chat_id = new_session['id']
+                st.session_state.messages = []
+                st.session_state.show_citation_id = None
+                st.session_state.documents_cache = {}
+                st.rerun()
 
     # Separator and Chat input - Place outside the message container
     if st.session_state.current_chat_id:
