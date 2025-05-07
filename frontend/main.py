@@ -1,15 +1,10 @@
 import datetime
-import os
-# import re
-from typing import List, Dict, Optional, Any, Literal
-# import uuid
-# from html import escape
 import streamlit as st
 import streamlit.components.v1 as components
 from streamlit_modal import Modal
-# import requests # Import requests for API calls
+
 st.set_page_config(layout="centered",
-                    page_title="Chat App",
+                    page_title="Chatbot Germano",
                     page_icon="🤖",
                     menu_items={
                                 'Get Help': 'https://www.example.com/help', # Placeholder
@@ -100,10 +95,6 @@ def inject_custom_css():
         }
         </style>
     """, unsafe_allow_html=True)
-inject_custom_css()
-
-#BACKEND_PORT = os.getenv("BACKEND_PORT") # Port for the backend API (default: 8000)
-#BACKEND_URL = os.getenv("BACKEND_URL") #"http://localhost:8000" # Or http://127.0.0.1:8000
 
 # --- Configuration ---
 _raw_url = st.secrets.get("API_URL", "").strip()
@@ -125,7 +116,7 @@ print(f"▶️ Using BACKEND_URL = {BACKEND_URL}")
 import utils
 utils.BACKEND_URL = BACKEND_URL
 
-"""# Streamlit App """
+"""# """
 
 def initialize_app():
     """Initialize app configuration and session state variables.
@@ -134,16 +125,6 @@ def initialize_app():
     Returns:
         Modal instance for displaying citation details.
     """
-    # st.set_page_config(layout="centered",
-    #                 page_title="Chat App",
-    #                 page_icon="🤖",
-    #                 menu_items={
-    #                             'Get Help': 'https://www.example.com/help', # Placeholder
-    #                             'Report a bug': "https://www.example.com/bug", # Placeholder
-    #                             'About': "# Streamlit Chat with FastAPI Backend!"
-    #                     },
-    #                 )
-
     # Initialize session state variables if they don't exist
     if "user_profile" not in st.session_state:
         st.session_state.user_profile = {"name": "User", "avatar": "👤"}
@@ -183,7 +164,7 @@ def initialize_app():
 
 def render_header() -> None:
     """Render the app header."""
-    st.header(":blue[Nature4AI Chat (FastAPI)] :recycle:", divider=True)
+    st.header(":blue[Chat with Germano]", divider=True)
 
 def render_sidebar() -> None:
     """Render the sidebar with chat sessions."""
@@ -439,6 +420,7 @@ def main() -> None:
 
     # Add custom CSS
     add_custom_css()
+    inject_custom_css()
 
     # Render UI components
     render_header()
