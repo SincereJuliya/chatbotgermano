@@ -95,18 +95,29 @@ def inject_custom_css():
             border-radius: 10px;
         }
         
+        /* Custom styling for the text button */
         div[data-testid="stButton"] > button[kind="secondary"] {
-            background: #3366CC;
-            border: none !important;
-            color: #3B82F6 !important;
-            box-shadow: none !important;
-            padding: 0 !important;
-            text-align: left !important;
-            width: 100% !important;
+            background-color: #E3F2FD !important;  /* Soft blue color */
+            border: 1px solid #BBDEFB !important;
+            color: #1E4B8B !important;  /* Darker blue text */
+            border-radius: 8px;
+            padding: 10px 15px !important;
+            margin: 15px 0;
+            width: 100%;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
+
         div[data-testid="stButton"] > button[kind="secondary"]:hover {
-            background-color: #3B82F610 !important;
-            text-decoration: underline;
+            background-color: #BBDEFB !important;  /* Slightly darker blue on hover */
+            color: #0D3C61 !important;
+            border-color: #90CAF9 !important;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        div[data-testid="stButton"] > button[kind="secondary"]:active {
+            background-color: #90CAF9 !important;
+            transform: translateY(1px);
         }
         
         </style>
