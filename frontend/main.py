@@ -95,41 +95,23 @@ def inject_custom_css():
             border-radius: 10px;
         }
         
-        /* Add this new rule */
         .clickable-text {
             color: #3B82F6 !important;
             cursor: pointer;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #3B82F6;
+            display: inline-block;
+            transition: all 0.3s;
+            margin: 10px 0;
         }
         .clickable-text:hover {
-            background-color: #f0f4f8;
-            text-decoration: underline;
+            background-color: #3B82F620;
+            text-decoration: none;
         }
         
         </style>
     """, unsafe_allow_html=True)
-     # Add JavaScript handler
-    components.html("""
-        <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const handleClick = (event) => {
-                if (event.target.closest('.clickable-text')) {
-                    window.parent.postMessage({
-                        type: 'streamlit:component',
-                        component: 'body',
-                        data: {type: 'new_chat_click'}
-                    }, '*');
-                }
-            };
-            
-            // Add event listener to the rendered element
-            const container = parent.document.querySelectorAll('[data-testid="stAppViewContainer"]')[0];
-            container.addEventListener('click', handleClick);
-        });
-        </script>
-    """, height=0, width=0)
 
 # --- Configuration ---
 _raw_url = st.secrets.get("API_URL", "").strip()
@@ -340,30 +322,33 @@ def render_chat_area() -> None:
             for i, message in enumerate(st.session_state.messages):
                 render_chat_message(message, i)
         else:
-            # Make the text clickable using markdown with HTML
+            # Clickable text with proper component communication
             st.markdown("""
-                <style>
-                    .clickable-text {
-                        color: #3B82F6 !important;
-                        cursor: pointer;
-                        text-decoration: none;
-                    }
-                    .clickable-text:hover {
-                        text-decoration: underline;
-                    }
-                </style>
-                
-                <div onclick="window.streamlit:componentData.emit('new_chat_click', {})" 
-                     class="clickable-text">
+                <div class="clickable-text" id="new-chat-trigger">
                     Select a chat from the sidebar or start a new one using ➕
                 </div>
             """, unsafe_allow_html=True)
             
-    # Handle new chat creation if triggered
-    if "new_chat_click" in st.session_state:
-        del st.session_state.new_chat_click  # Clear the trigger
-        
-        # Reuse the existing new chat logic from the sidebar button
+    # Component to handle click detection
+    clicked = components.html(
+        """
+        <script>
+        const container = document.getElementById('new-chat-trigger');
+        container.onclick = () => {
+            window.parent.postMessage({
+                type: 'streamlit:setComponentValue',
+                value: 'clicked'
+            }, '*');
+        }
+        </script>
+        """,
+        height=0,
+        width=0,
+        key="new_chat_trigger"
+    )
+
+    if clicked == "clicked":
+        # Reuse the exact same logic as the ➕ button
         with st.spinner("Creating new chat..."):
             new_session = api_create_session()
             if new_session:
