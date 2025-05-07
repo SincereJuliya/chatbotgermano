@@ -96,7 +96,7 @@ def inject_custom_css():
         }
         
         div[data-testid="stButton"] > button[kind="secondary"] {
-            background: transparent !important;
+            background: #3366CC;
             border: none !important;
             color: #3B82F6 !important;
             box-shadow: none !important;
