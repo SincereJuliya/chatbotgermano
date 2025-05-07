@@ -94,6 +94,30 @@ def inject_custom_css():
             background-color: #B3DAFF;
             border-radius: 10px;
         }
+        
+        /* clickable-info paragraph */
+        .clickable-info {
+            color: #3366CC;
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 1rem 0 0.25rem;
+            cursor: default;
+        }
+
+        /* make the “start” button look like plain text/link */
+        #start-new-chat>button {
+            background: none;
+            border: none;
+            padding: 0;
+            color: #3366CC;
+            font-size: 1rem;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        #start-new-chat>button:hover {
+            color: #264D99;
+        }
+
         </style>
     """, unsafe_allow_html=True)
 
@@ -117,7 +141,7 @@ print(f"▶️ Using BACKEND_URL = {BACKEND_URL}")
 import utils
 utils.BACKEND_URL = BACKEND_URL
 
-"""# ChatbotGermano """
+"""# Chatbot Germano: """
 
 def initialize_app():
     """Initialize app configuration and session state variables.
@@ -306,7 +330,26 @@ def render_chat_area() -> None:
             for i, message in enumerate(st.session_state.messages):
                 render_chat_message(message, i)
         else:
-            st.info("Select a chat from the sidebar or start a new one using ➕.")
+             # show styled instructions
+            st.markdown(
+                "<p class='clickable-info'>Select a chat from the sidebar or start a new one using ➕.</p>",
+                unsafe_allow_html=True,
+            )
+            # invisible-but-clickable button
+            if st.button("Start a new chat ➕", key="start-new-chat"):
+                # exactly the same logic you already have for the ➕ in the sidebar:
+                with st.spinner("Creating new chat..."):
+                    new_session = api_create_session()
+                if new_session:
+                    st.session_state.chat_sessions[new_session['id']] = new_session
+                    st.session_state.current_chat_id = new_session['id']
+                    st.session_state.messages = []
+                    st.session_state.show_citation_id = None
+                    st.session_state.documents_cache = {}
+                    st.toast(f"Created '{new_session['title']}'")
+                    st.experimental_rerun()
+                else:
+                    st.error("Failed to create new chat session on backend.")
 
     # Separator and Chat input - Place outside the message container
     if st.session_state.current_chat_id:
