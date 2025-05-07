@@ -31,10 +31,34 @@ from utils import(
 def inject_custom_css():
     st.markdown("""
         <style>
+        
         /* Global background */
         .stApp {
             background-color: #FFFFFF;
             color: #1E293B;
+        }
+        
+        /* Light theme */
+        [data-theme="light"] div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"] {
+            background-color: #E3F2FD !important;
+            color: #1E4B8B !important;
+            border-color: #BBDEFB !important;
+        }
+
+        /* Dark theme override */
+        [data-theme="dark"] div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"] {
+            background-color: #1E3A5F !important;  /* Dark blue */
+            color: #E3F2FD !important;
+            border-color: #3D5A80 !important;
+        }
+
+        /* Shared properties */
+        div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"] {
+            border-radius: 8px !important;
+            padding: 10px 15px !important;
+            margin: 15px 0 !important;
+            width: 100% !important;
+            transition: all 0.2s ease !important;
         }
 
         /* Chat container */
