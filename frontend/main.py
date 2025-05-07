@@ -95,27 +95,28 @@ def inject_custom_css():
             border-radius: 10px;
         }
         
-        /* Custom styling for the text button */
-        div[data-testid="stButton"] > button[kind="secondary"] {
-            background-color: #E3F2FD !important;  /* Soft blue color */
+        /* Target only the specific button using its key */
+        div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"] {
+            background-color: #E3F2FD !important;
             border: 1px solid #BBDEFB !important;
-            color: #1E4B8B !important;  /* Darker blue text */
+            color: #1E4B8B !important;
             border-radius: 8px;
-            padding: 10px 15px !important;
+            padding: 10px 15px;
             margin: 15px 0;
             width: 100%;
             transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
-        div[data-testid="stButton"] > button[kind="secondary"]:hover {
-            background-color: #BBDEFB !important;  /* Slightly darker blue on hover */
+        /* Hover state for specific button */
+        div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"]:hover {
+            background-color: #BBDEFB !important;
             color: #0D3C61 !important;
             border-color: #90CAF9 !important;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        div[data-testid="stButton"] > button[kind="secondary"]:active {
+        /* Active state for specific button */
+        div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"]:active {
             background-color: #90CAF9 !important;
             transform: translateY(1px);
         }
@@ -322,11 +323,11 @@ def render_chat_area() -> None:
         else:
             # Text-styled button that shares the create_new_chat function
             st.button(
-                "Select a chat from the sidebar or start a new one using ➕",
-                key="text_chat_trigger",
-                on_click=create_new_chat,
-                help="Start a new chat",
-                type="secondary"
+                   "Select a chat from the sidebar or start a new one using ➕",
+                    key="text_chat_trigger",  # This key is used in the CSS selector
+                    on_click=create_new_chat,
+                    help="Start a new chat",
+                    type="secondary"
             )
     
 
