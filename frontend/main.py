@@ -322,24 +322,32 @@ def render_chat_area() -> None:
             for i, message in enumerate(st.session_state.messages):
                 render_chat_message(message, i)
         else:
-            # Clickable text with proper component communication
-            st.markdown("""
-                <div class="clickable-text" id="new-chat-trigger">
-                    Select a chat from the sidebar or start a new one using ➕
-                </div>
-            """, unsafe_allow_html=True)
+            click_container = st.container()
+            with click_container:
+                st.markdown("""
+                    <div class="clickable-text" id="new-chat-trigger">
+                        Select a chat from the sidebar or start a new one using ➕
+                    </div>
+                """, unsafe_allow_html=True)
             
     # Component to handle click detection
     clicked = components.html(
         """
         <script>
-        const container = document.getElementById('new-chat-trigger');
-        container.onclick = () => {
-            window.parent.postMessage({
-                type: 'streamlit:setComponentValue',
-                value: 'clicked'
-            }, '*');
-        }
+        window.addEventListener('load', () => {
+            const checkExist = setInterval(() => {
+                const container = document.getElementById('new-chat-trigger');
+                if (container) {
+                    clearInterval(checkExist);
+                    container.onclick = () => {
+                        window.parent.postMessage({
+                            type: 'streamlit:setComponentValue',
+                            value: 'clicked'
+                        }, '*');
+                    }
+                }
+            }, 100);
+        });
         </script>
         """,
         height=0,
@@ -347,16 +355,19 @@ def render_chat_area() -> None:
     )
 
     if clicked == "clicked":
-        # Reuse the exact same logic as the ➕ button
+        # Clear existing messages immediately for better UX
+        st.session_state.messages = []
         with st.spinner("Creating new chat..."):
             new_session = api_create_session()
             if new_session:
                 st.session_state.chat_sessions[new_session['id']] = new_session
                 st.session_state.current_chat_id = new_session['id']
-                st.session_state.messages = []
                 st.session_state.show_citation_id = None
                 st.session_state.documents_cache = {}
                 st.rerun()
+            else:
+                st.error("Failed to create new chat session")
+
 
     # Separator and Chat input - Place outside the message container
     if st.session_state.current_chat_id:
