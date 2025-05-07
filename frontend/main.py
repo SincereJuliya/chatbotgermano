@@ -343,8 +343,7 @@ def render_chat_area() -> None:
         </script>
         """,
         height=0,
-        width=0,
-        key="new_chat_trigger"
+        width=0
     )
 
     if clicked == "clicked":
