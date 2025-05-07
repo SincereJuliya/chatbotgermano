@@ -95,24 +95,6 @@ def inject_custom_css():
             border-radius: 10px;
         }
         
-        .clickable-text {
-            color: #3B82F6 !important;
-            cursor: pointer;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #3B82F6;
-            margin: 15px 0;
-            transition: all 0.2s;
-            display: inline-block;
-        }
-        .clickable-text:hover {
-            background-color: #3B82F610;
-            transform: translateY(-1px);
-        }
-        .clickable-text:active {
-            transform: translateY(0);
-        }
-        
         </style>
     """, unsafe_allow_html=True)
 
@@ -325,52 +307,39 @@ def render_chat_area() -> None:
             for i, message in enumerate(st.session_state.messages):
                 render_chat_message(message, i)
         else:
-            click_container = st.container()
-            with click_container:
+             # Create an invisible button with a visible label
+            col1, col2 = st.columns([0.8, 0.2])
+            with col1:
                 st.markdown("""
-                    <div class="clickable-text" id="new-chat-trigger">
+                    <style>
+                        .clickable-text {
+                            color: #3B82F6 !important;
+                            cursor: pointer;
+                            padding: 8px 12px;
+                            border-radius: 8px;
+                            transition: all 0.3s;
+                            display: inline-block;
+                        }
+                        .clickable-text:hover {
+                            background-color: #3B82F620;
+                            text-decoration: underline;
+                        }
+                        /* Hide the actual button */
+                        #new-chat-trigger-btn {
+                            display: none !important;
+                        }
+                    </style>
+                    <label for="new-chat-trigger-btn" class="clickable-text">
                         Select a chat from the sidebar or start a new one using ➕
-                    </div>
+                    </label>
                 """, unsafe_allow_html=True)
-            
-    # Component to handle click detection
-    clicked = components.html(
-        """
-        <script>
-        window.addEventListener('load', () => {
-            const checkExist = setInterval(() => {
-                const container = document.getElementById('new-chat-trigger');
-                if (container) {
-                    clearInterval(checkExist);
-                    container.onclick = () => {
-                        window.parent.postMessage({
-                            type: 'streamlit:setComponentValue',
-                            value: 'clicked'
-                        }, '*');
-                    }
-                }
-            }, 100);
-        });
-        </script>
-        """,
-        height=0,
-        width=0
-    )
-
-    if clicked == "clicked":
-        # Clear existing messages immediately for better UX
-        st.session_state.messages = []
-        with st.spinner("Creating new chat..."):
-            new_session = api_create_session()
-            if new_session:
-                st.session_state.chat_sessions[new_session['id']] = new_session
-                st.session_state.current_chat_id = new_session['id']
-                st.session_state.show_citation_id = None
-                st.session_state.documents_cache = {}
-                st.rerun()
-            else:
-                st.error("Failed to create new chat session")
-
+                
+                # Hidden button that will be clicked via the label
+                if st.button("Create New Chat", 
+                           key="new-chat-trigger-btn", 
+                           help="Start a new chat",
+                           on_click=create_new_chat_callback):
+                    pass
 
     # Separator and Chat input - Place outside the message container
     if st.session_state.current_chat_id:
@@ -398,6 +367,20 @@ def render_chat_area() -> None:
             else:
                  st.error("Failed to send message.") # API call already showed error
 
+# Add this callback function
+def create_new_chat_callback():
+    """Callback function for creating new chats"""
+    with st.spinner("Creating new chat..."):
+        new_session = api_create_session()
+        if new_session:
+            st.session_state.chat_sessions[new_session['id']] = new_session
+            st.session_state.current_chat_id = new_session['id']
+            st.session_state.messages = []
+            st.session_state.show_citation_id = None
+            st.session_state.documents_cache = {}
+            st.rerun()
+        else:
+            st.error("Failed to create new chat session")
 
 def display_citation_modal(modal_instance: Modal) -> None:
     """Displays the modal with citation details if show_citation_id is set."""
