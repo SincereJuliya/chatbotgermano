@@ -228,11 +228,10 @@ def inject_custom_css():
     [data-theme="dark"] .chat-container::-webkit-scrollbar-thumb {
         background-color: #475569 !important;  /* Dark mode scroll */
     }
-    
-    div[data-testid="stVerticalBlock"][data-test-key="chat_container"] {
-        background-color: #475569 !important;
-    }
 
+    div[data-testid="stVerticalBlock"][data-test-key="chat_container"] {
+        background-color: your-color !important;
+    }
         
         </style>
     """, unsafe_allow_html=True)
@@ -331,11 +330,7 @@ def render_sidebar() -> None:
             st.caption("No chats yet. Click ➕ to start!")
         else:
             # Scrollable Chat List
-            chat_list_container = chat_container = st.container(
-                            height=500, 
-                            border=False,
-                            key="chat_container"  # Add this for better CSS targeting
-            )
+            chat_list_container = st.container(height=300, border=True)
             with chat_list_container:
                 # Sort by title or creation date if available and desired
                 # API currently sorts by created_at desc, let's use the order received
@@ -427,7 +422,11 @@ def render_chat_message(message: Dict, index: int) -> None:
 
 def render_chat_area() -> None:
     """Render the main chat area including messages and input."""
-    chat_container = st.container(height=500, border=False) # Adjust height as needed
+    chat_container = st.container(
+                            height=500, 
+                            border=False,
+                            key="chat_container"  # Add this for better CSS targeting
+    )
 
     # Display existing messages for the current chat
     with chat_container:
