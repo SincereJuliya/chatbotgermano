@@ -126,8 +126,9 @@ def inject_custom_css():
             color: #1E4B8B !important;
             border-radius: 8px;
             padding: 20px 40px;                            /* Larger button */
-            margin: 20px auto;                             /* Center-aligned */
-            width: 100%;
+            margin: 20px 0 ;            
+            width: 100% !important;
+            display: block !important;
             transition: all 0.2s ease;
         }
 
