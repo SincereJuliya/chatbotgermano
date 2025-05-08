@@ -159,6 +159,15 @@ def inject_custom_css():
                 background-color: #0F172A !important;  /* Dark blue-gray */
             }
 
+            /* Main background stack */
+            div.stApp,
+            div.stApp > div,
+            div.stAppViewContainer,
+            section.stMain {
+                background-color: #0F172A !important;  /* Or your preferred dark color */
+                color: #E2E8F0 !important;  /* Light text */
+            }
+            
             /* Chat container */
             .chat-container {
                 background-color: #1E293B !important;
