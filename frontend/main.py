@@ -34,8 +34,13 @@ def inject_custom_css():
         
         /* Global background */
         [data-theme="light"] .stApp {
-            background-color: #F8FAFC !important;  /* Changed from #FFFFFF to softer white */
-            color: #1E293B;
+            background-image: url('frontend/static/IMG_8702.PNG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /*background-color: #F8FAFC !important;  Changed from #FFFFFF to softer white 
+            color: #1E293B;*/
         }
         
         [data-theme="dark"] .stApp {
