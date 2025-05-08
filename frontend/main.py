@@ -125,10 +125,11 @@ def inject_custom_css():
             border: 1px solid #BBDEFB !important;
             color: #1E4B8B !important;
             border-radius: 8px;
-            padding: 20px 40px;                            /* Larger button */
-            margin: 20px 0 ;            
-            width: 100% !important;
             display: block !important;
+            text-align: center !important;  /* Add this line */
+            padding: 20px 40px;  
+            margin: 20px 0;            
+            width: 100% !important;
             transition: all 0.2s ease;
         }
 
@@ -145,6 +146,17 @@ def inject_custom_css():
         button[kind="primary"].stButton>button:first-child[id='text_chat_trigger']:active {
             background-color: #90CAF9 !important;
             transform: translateY(1px);
+        }
+        
+        div.stButton {
+            display: flex !important;
+            justify-content: center !important;
+            width: 100% !important;
+        }
+
+        div[data-testid="stVerticalBlock"] {
+            max-width: none !important;
+            padding: 0 1rem !important;
         }
         
         </style>
