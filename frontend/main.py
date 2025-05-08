@@ -34,7 +34,7 @@ def inject_custom_css():
         
         /* Global background */
         [data-theme="light"] .stApp {
-            background-image: url('https://github.com/SincereJuliya/chatbotgermano/blob/frontdev/frontend/static/IMG_8702.PNG');
+            background-image: url('https://raw.githubusercontent.com/SincereJuliya/chatbotgermano/refs/heads/frontdev/frontend/static/IMG_8702.PNG');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
