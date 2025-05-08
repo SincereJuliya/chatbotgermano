@@ -40,6 +40,7 @@ def inject_custom_css():
         
         [data-theme="dark"] .stApp {
             background-color: #0F172A !important;  /* Changed from #FFFFFF to softer white */
+            background-image: url('components/IMG_8702.PNG')
             color: #1E293B;
         }
         
@@ -159,15 +160,6 @@ def inject_custom_css():
         
         /* Dark mode overrides */
         [data-theme="dark"] {
-
-            /* Main background stack */
-            div.stApp,
-            div.stApp > div,
-            div.stAppViewContainer,
-            section.stMain {
-                background-color: #0F172A !important;  /* Or your preferred dark color */
-                color: #E2E8F0 !important;  /* Light text */
-            }
             
             /* Chat container */
             .chat-container {
@@ -190,7 +182,7 @@ def inject_custom_css():
             /* Text colors */
             .stMarkdown, .stText, .stChatMessage {
                 color: #CBD5E1 !important;
-            }
+            } 
 
             /* Primary button */
             button[kind="primary"] {
