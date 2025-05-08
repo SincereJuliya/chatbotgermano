@@ -34,7 +34,7 @@ def inject_custom_css():
         
         /* Global background */
         [data-theme="light"] .stApp {
-            background: url('https://raw.githubusercontent.com/SincereJuliya/chatbotgermano/refs/heads/frontdev/frontend/static/IMG_8702.PNG');
+            background: url("https://raw.githubusercontent.com/SincereJuliya/chatbotgermano/refs/heads/frontdev/frontend/static/IMG_8702.PNG");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -48,22 +48,6 @@ def inject_custom_css():
             background: url('/frontend/static/IMG_8702.PNG');
             color: #1E293B;
         }
-        
-        /* Light theme 
-        [data-theme="light"] div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"] {
-            background-color: #E3F2FD !important;
-            color: #1E4B8B !important;
-            border-color: #BBDEFB !important;
-        }*/
-
-        /* Shared properties 
-        div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"] {
-            border-radius: 8px !important;
-            padding: 10px 15px !important;
-            margin: 15px 0 !important;
-            width: 100% !important;
-            transition: all 0.2s ease !important;
-        }*/
 
         /* Chat container */
         .chat-container {
@@ -163,7 +147,7 @@ def inject_custom_css():
             padding: 0 1rem !important;
         }
         
-        /* Dark mode overrides */
+        /* Dark mode overrides - works*/
         [data-theme="dark"] {
             
             /* Chat container */
@@ -203,10 +187,10 @@ def inject_custom_css():
             }
         }
 
-    /* Dark mode scrollbars 
+    /* Dark mode scrollbars */
     [data-theme="dark"]::-webkit-scrollbar-thumb {
         background-color: #475569 !important;
-    }*/
+    }
     
     /* Light theme 
     div[data-testid="stVerticalBlock"] > div:has(> [data-testid="stVerticalBlockBorderWrapper"]) {
