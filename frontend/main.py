@@ -44,6 +44,10 @@ def inject_custom_css():
             color: #1E293B;*/
         }
         
+        [data-testid="stSidebar"] > div:first-child {{
+          background: url(data:image/{png};base64,{base64.b64encode(open("https://raw.githubusercontent.com/SincereJuliya/chatbotgermano/refs/heads/frontdev/frontend/static/IMG_8702.PNG", "rb").read()).decode()});
+        }}
+        
         [data-theme="dark"] .stApp {
             background: url('/frontend/static/IMG_8702.PNG');
             color: #1E293B;
