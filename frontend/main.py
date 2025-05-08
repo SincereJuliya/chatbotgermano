@@ -33,7 +33,7 @@ from utils import(
 def inject_custom_css():
     try:
         # Encode image
-        img_path = Path("frontend/leonardo.jpg")
+        img_path = Path("frontend/leonardo.jpg").parent / "leonardo.jpg"
         if img_path.exists():
             with open(img_path, "rb") as f:
                 b64_img = base64.b64encode(f.read()).decode()
@@ -50,7 +50,7 @@ def inject_custom_css():
                 
                 /* Global background */
                 [data-theme="light"] .stApp {
-                    background-image: url(data:image/jpg;base64,{b64}) !important;
+                    background-image: url(data:image/jpeg;base64,{b64}) !important;
                     background-size: contain;
                     min-height: 100vh !important;
                     min-width: 100vw !important;
@@ -60,7 +60,7 @@ def inject_custom_css():
                 }
                 
                 [data-testid="stSidebarContent"] > div:first-child {{
-                    background: url(data:image/jpg;base64,{b64_img});
+                    background: url(data:image/jpeg;base64,{b64_img});
                 }}
                 
                 [data-theme="dark"] .stApp {
