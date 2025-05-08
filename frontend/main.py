@@ -1,5 +1,6 @@
 import datetime
 from pathlib import Path
+import base64
 import streamlit as st
 from typing import List, Dict, Optional, Any, Literal
 import streamlit.components.v1 as components
