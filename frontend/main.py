@@ -33,7 +33,12 @@ def inject_custom_css():
         <style>
         
         /* Global background */
-        .stApp {
+        [data-theme="light"] .stApp {
+            background-color: #F8FAFC !important;  /* Changed from #FFFFFF to softer white */
+            color: #1E293B;
+        }
+        
+        [data-theme="dark"] .stApp {
             background-color: #0F172A !important;  /* Changed from #FFFFFF to softer white */
             color: #1E293B;
         }
