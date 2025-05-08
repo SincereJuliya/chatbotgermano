@@ -127,9 +127,9 @@ def inject_custom_css():
             border-radius: 8px;
             display: block !important;
             text-align: center !important;  /* Add this line */
-            padding: 20px 40px;  
-            margin: 20px 0;            
-            width: 100% !important;
+            padding: 20px 40px;           
+            margin: 20px 1rem !important;  /* Match header's side margins */
+            width: calc(100% - 2rem) !important;  /* Compensate for margins */
             transition: all 0.2s ease;
         }
 
@@ -142,7 +142,6 @@ def inject_custom_css():
         }
 
         /* Active state for specific button */
-        /* div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"]:active { */
         button[kind="primary"].stButton>button:first-child[id='text_chat_trigger']:active {
             background-color: #90CAF9 !important;
             transform: translateY(1px);
@@ -153,11 +152,13 @@ def inject_custom_css():
             justify-content: center !important;
             width: 100% !important;
         }
-
+        
+        div.stApp > div[class*="block-container"],
         div[data-testid="stVerticalBlock"] {
             max-width: none !important;
             padding: 0 1rem !important;
         }
+
         
         </style>
     """, unsafe_allow_html=True)
