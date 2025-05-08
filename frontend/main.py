@@ -34,7 +34,7 @@ def inject_custom_css():
         
         /* Global background */
         [data-theme="light"] .stApp {
-            background-image: url(data:image/{png};base64,{base64.b64encode(open("static/IMG_8702.png", "rb").read()).decode()});
+            background-image: url(data:image/{png};base64,{base64.b64encode(open("IMG_8702.png", "rb").read()).decode()});
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -45,7 +45,7 @@ def inject_custom_css():
         }
         
         [data-theme="dark"] .stApp {
-            background: url(data:image/{png};base64,{base64.b64encode(open("/frontend/static/IMG_8702.png", "rb").read()).decode()});
+            background: url(data:image/{png};base64,{base64.b64encode(open("IMG_8702.png", "rb").read()).decode()});
             color: #1E293B;
         }
 
