@@ -30,7 +30,7 @@ from utils import(
 
 def inject_custom_css():
     # Encode image
-    img_path = Path("germanobook.png")
+    img_path = Path("frontend/germanobook.png")
     if img_path.exists():
         with open(img_path, "rb") as f:
             b64_img = base64.b64encode(f.read()).decode()
@@ -40,7 +40,7 @@ def inject_custom_css():
             
             /* Global background */
             [data-theme="light"] .stApp {
-                background-image: url( data:image/{png};base64,{base64.b64encode(open("germanobook.png", "rb").read()).decode()} );
+                background-image: url( data:image/{png};base64,{base64.b64encode(open("frontend/germanobook.png", "rb").read()).decode()} );
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
