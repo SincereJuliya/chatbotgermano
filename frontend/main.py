@@ -230,7 +230,7 @@ def inject_custom_css():
         """, unsafe_allow_html=True)
     
     else:
-        st.error("Background image not found!")
+        st.error("Background image not found!") + str(img_path)
 
 # --- Configuration ---
 _raw_url = st.secrets.get("API_URL", "").strip()
