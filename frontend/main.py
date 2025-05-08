@@ -45,7 +45,8 @@ def inject_custom_css():
         }
         
         [data-testid="stSidebar"] > div:first-child {{
-          background: url(data:image/{png};base64,{base64.b64encode(open("/home/sincerejuliya/Documents/GitHub/chatbotgermano/frontend/static/IMG_8702.PNG", "rb").read()).decode()});
+          background-image: url(data:image/{png};base64,{base64.b64encode(open("static/IMG_8702.PNG", "rb").read()).decode()});
+          background-position: center;
         }}
         
         [data-theme="dark"] .stApp {
