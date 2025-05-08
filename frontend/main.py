@@ -163,7 +163,7 @@ def inject_custom_css():
             padding: 0 1rem !important;
         }
         
-        /* Dark mode overrides 
+        /* Dark mode overrides */
         [data-theme="dark"] {
             
             /* Chat container */
@@ -201,7 +201,7 @@ def inject_custom_css():
                 border-color: #3B82F6 !important;
                 color: #BFDBFE !important;
             }
-        }*/
+        }
 
     /* Dark mode scrollbars */
     [data-theme="dark"]::-webkit-scrollbar-thumb {
