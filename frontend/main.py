@@ -33,7 +33,7 @@ from utils import(
 def inject_custom_css():
     try:
         # Encode image
-        img_path = Path("frontend/1024px-Leonardo-Robot3.jpg")
+        img_path = Path("frontend/leonardo.jpg")
         if img_path.exists():
             with open(img_path, "rb") as f:
                 b64_img = base64.b64encode(f.read()).decode()
