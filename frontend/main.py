@@ -50,12 +50,13 @@ def inject_custom_css():
                 
                 /* Global background */
                 [data-theme="light"] .stApp {
-                    background: url(data:image/webp;base64,{b64_img});
+                    background-image: url(data:image/webp;base64,{b64}) !important;
                     background-size: contain;
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    background-attachment: fixed;
-                    background-color: #ffffff;  /* Fallback color */
+                    min-height: 100vh !important;
+                    min-width: 100vw !important;
+                    transform: translateZ(0);
+                    backface-visibility: hidden;
+                    perspective: 1000;
                 }
                 
                 [data-testid="stSidebarContent"] > div:first-child {{
