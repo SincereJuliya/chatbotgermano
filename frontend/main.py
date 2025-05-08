@@ -222,18 +222,19 @@ def inject_custom_css():
         border: 1px solid #334155 !important;
     }*/
 
-    /* Scrollbar styling 
+    
     .chat-container::-webkit-scrollbar-thumb {
         background-color: #94A3B8 !important;  /* Light mode scroll */
     }
-
+    
+    /* Scrollbar styling 
     [data-theme="dark"] .chat-container::-webkit-scrollbar-thumb {
         background-color: #475569 !important;  /* Dark mode scroll */
-    }
+    }*/
 
     div[data-testid="stVerticalBlock"][data-test-key="chat_container"] {
         background-color: #475569 !important;
-    }*/
+    }
         
         </style>
     """, unsafe_allow_html=True)
