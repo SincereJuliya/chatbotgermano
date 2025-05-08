@@ -34,7 +34,7 @@ def inject_custom_css():
         
         /* Global background */
         .stApp {
-            background-color: #FFFFFF;
+            background-color: #0F172A !important;  /* Changed from #FFFFFF to softer white */
             color: #1E293B;
         }
         
