@@ -34,7 +34,7 @@ def inject_custom_css():
         
         /* Global background */
         [data-theme="light"] .stApp {
-            background: url("https://raw.githubusercontent.com/SincereJuliya/chatbotgermano/refs/heads/frontdev/frontend/static/IMG_8702.PNG");
+            background-image: url(data:image/{png};base64,{base64.b64encode(open("static/IMG_8702.png", "rb").read()).decode()});
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -44,13 +44,8 @@ def inject_custom_css():
             color: #1E293B;*/
         }
         
-        [data-testid="stSidebar"] > div:first-child {{
-          background-image: url(data:image/{png};base64,{base64.b64encode(open("static/IMG_8702.PNG", "rb").read()).decode()});
-          background-position: center;
-        }}
-        
         [data-theme="dark"] .stApp {
-            background: url('/frontend/static/IMG_8702.PNG');
+            background: url(data:image/{png};base64,{base64.b64encode(open("/frontend/static/IMG_8702.png", "rb").read()).decode()});
             color: #1E293B;
         }
 
