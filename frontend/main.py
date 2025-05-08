@@ -203,10 +203,10 @@ def inject_custom_css():
             }
         }*/
 
-    /* Dark mode scrollbars 
+    /* Dark mode scrollbars */
     [data-theme="dark"]::-webkit-scrollbar-thumb {
         background-color: #475569 !important;
-    }*/
+    }
 
     /* Light theme */
     div[data-testid="stVerticalBlock"] > div:has(> [data-testid="stVerticalBlockBorderWrapper"]) {
@@ -216,21 +216,21 @@ def inject_custom_css():
         margin: 1rem 0;
     }
 
-    /* Dark theme override 
+    /* Dark theme override */
     [data-theme="dark"] div[data-testid="stVerticalBlock"] > div:has(> [data-testid="stVerticalBlockBorderWrapper"]) {
         background-color: #1E293B !important;  /* Dark slate */
         border: 1px solid #334155 !important;
-    }*/
+    }
 
     
     .chat-container::-webkit-scrollbar-thumb {
         background-color: #94A3B8 !important;  /* Light mode scroll */
     }
     
-    /* Scrollbar styling 
+    /* Scrollbar styling */
     [data-theme="dark"] .chat-container::-webkit-scrollbar-thumb {
         background-color: #475569 !important;  /* Dark mode scroll */
-    }*/
+    }
 
     div[data-testid="stVerticalBlock"][data-test-key="chat_container"] {
         background-color: #475569 !important;
