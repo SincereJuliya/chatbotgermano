@@ -48,13 +48,13 @@ def inject_custom_css():
             st.markdown("""
                 <style>
                 
-                /* Global background */
+                /* Global background 
                 [data-theme="light"] .stApp {
                     background-image: url(data:image/jpeg;base64,{b64_img}) !important;
                     background-size: contain;
                     min-height: 100vh !important;
                     min-width: 100vw !important;
-                }
+                }*/
                 
                 [data-testid="stAppViewContainer"] > .main {
                     background-image: url(data:image/jpeg;base64,{b64_img}) !important;
@@ -163,12 +163,12 @@ def inject_custom_css():
                     justify-content: center !important;
                     width: 100% !important;
                 }
-                /* 
+                
                 div.stApp > div[class*="block-container"],
                 div[data-testid="stVerticalBlock"] {
                     max-width: none !important;
                     padding: 0 1rem !important;
-                }*/
+                }
                 
                 /* Dark mode overrides - works*/
                 [data-theme="dark"] {
