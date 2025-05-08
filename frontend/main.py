@@ -125,8 +125,8 @@ def inject_custom_css():
             border: 1px solid #BBDEFB !important;
             color: #1E4B8B !important;
             border-radius: 8px;
-            padding: 10px 15px;
-            margin: 15px 0;
+            padding: 20px 40px;                            /* Larger button */
+            margin: 20px auto;                             /* Center-aligned */
             width: 100%;
             transition: all 0.2s ease;
         }
@@ -348,7 +348,7 @@ def render_chat_area() -> None:
         else:
             # Text-styled button that shares the create_new_chat function
             st.button(
-                   "Select a chat from the sidebar or start a new one using ➕",
+                   "Select a chat from the sidebar or start a new one using  ➕",
                     key="text_chat_trigger",  # This key is used in the CSS selector
                     on_click=create_new_chat,
                     help="Start a new chat",
