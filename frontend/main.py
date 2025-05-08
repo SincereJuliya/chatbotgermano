@@ -33,7 +33,7 @@ from utils import(
 def inject_custom_css():
     try:
         # Encode image
-        img_path = Path("frontend/leonardo.jpg").parent / "leonardo.jpg"
+        img_path = Path("frontend/germanobook.jpg").parent / "germanobook.jpg"
         if img_path.exists():
             with open(img_path, "rb") as f:
                 b64_img = base64.b64encode(f.read()).decode()
@@ -54,9 +54,6 @@ def inject_custom_css():
                     background-size: contain;
                     min-height: 100vh !important;
                     min-width: 100vw !important;
-                    transform: translateZ(0);
-                    backface-visibility: hidden;
-                    perspective: 1000;
                 }
                 
                 [data-testid="stSidebarContent"] > div:first-child {{
@@ -64,7 +61,7 @@ def inject_custom_css():
                 }}
                 
                 [data-theme="dark"] .stApp {
-                    background: url(data:image/jpg;base64,{b64_img});
+                    background: url(data:image/jpg;base64,{b64_img})!important;
                     color: #1E293B;
                 }
 
