@@ -50,7 +50,7 @@ def inject_custom_css():
                 
                 /* Global background */
                 [data-theme="light"] .stApp {
-                    background-image: url(data:image/jpeg;base64,{b64}) !important;
+                    background-image: url(data:image/jpeg;base64,{b64_img}) !important;
                     background-size: contain;
                     min-height: 100vh !important;
                     min-width: 100vw !important;
@@ -579,12 +579,14 @@ def main() -> None:
 
     # Add custom CSS
     add_custom_css()
-    inject_custom_css()
 
     # Render UI components
     render_header()
     render_sidebar()
     render_chat_area()
+    
+    
+    inject_custom_css()
 
     # Handle Citation Modal Display (check state and render if needed)
     display_citation_modal(modal_instance)
