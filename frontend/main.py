@@ -45,13 +45,6 @@ def inject_custom_css():
             border-color: #BBDEFB !important;
         }
 
-        /* Dark theme override */
-        [data-theme="dark"] div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"] {
-            background-color: #1E3A5F !important;  /* Dark blue */
-            color: #E3F2FD !important;
-            border-color: #3D5A80 !important;
-        }
-
         /* Shared properties */
         div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"] {
             border-radius: 8px !important;
@@ -158,6 +151,56 @@ def inject_custom_css():
             max-width: none !important;
             padding: 0 1rem !important;
         }
+        
+        /* Dark mode overrides */
+        [data-theme="dark"] {
+            /* Main app background */
+            .stApp {
+                background-color: #0F172A !important;  /* Dark blue-gray */
+            }
+
+            /* Chat container */
+            .chat-container {
+                background-color: #1E293B !important;
+            }
+
+            /* User message bubble */
+            .user-message {
+                background-color: #334155 !important;
+                border-color: #475569 !important;
+                color: #F8FAFC !important;
+            }
+
+            /* Assistant message bubble */
+            .assistant-message {
+                background-color: #1E40AF !important;  /* Dark blue */
+                color: #E2E8F0 !important;
+            }
+
+            /* Text colors */
+            .stMarkdown, .stText, .stChatMessage {
+                color: #CBD5E1 !important;
+            }
+
+            /* Primary button */
+            button[kind="primary"] {
+                background-color: #2563EB !important;
+                color: #E0F2FE !important;
+            }
+
+            /* Specific trigger button */
+            button[kind="primary"].stButton>button:first-child[id='text_chat_trigger'] {
+                background-color: #1E3A8A !important;
+                border-color: #3B82F6 !important;
+                color: #BFDBFE !important;
+            }
+        }
+
+    /* Dark mode scrollbars */
+    [data-theme="dark"]::-webkit-scrollbar-thumb {
+        background-color: #475569 !important;
+    }
+
 
         
         </style>
@@ -183,7 +226,7 @@ print(f"▶️ Using BACKEND_URL = {BACKEND_URL}")
 import utils
 utils.BACKEND_URL = BACKEND_URL
 
-"""# Chatbot Germano: """
+"""# Chatbot Germano """
 
 def initialize_app():
     """Initialize app configuration and session state variables.
