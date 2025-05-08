@@ -40,7 +40,7 @@ def inject_custom_css():
                 
             st.info("Background image") + str(img_path)
             if b64_img.exists():
-                st.info("Background image") + str(b64_img)
+                st.info("Background image exists")
             
             st.markdown("""
                 <style>
