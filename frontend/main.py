@@ -208,13 +208,13 @@ def inject_custom_css():
         background-color: #475569 !important;
     }*/
 
-    /* Light theme 
+    /* Light theme */
     div[data-testid="stVerticalBlock"] > div:has(> [data-testid="stVerticalBlockBorderWrapper"]) {
         background-color: #F0F4F8 !important;  /* Light blue-gray */
         border-radius: 12px;
         padding: 1rem;
         margin: 1rem 0;
-    }*/
+    }
 
     /* Dark theme override 
     [data-theme="dark"] div[data-testid="stVerticalBlock"] > div:has(> [data-testid="stVerticalBlockBorderWrapper"]) {
