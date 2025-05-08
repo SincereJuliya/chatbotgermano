@@ -56,7 +56,7 @@ def inject_custom_css():
                     min-width: 100vw !important;
                 }
                 
-                [data-testid="stSidebarContent"] > div:first-child {{
+                [data-testid="stSidebar"] > div:first-child {{
                     background: url(data:image/jpeg;base64,{b64_img});
                 }}
                 
