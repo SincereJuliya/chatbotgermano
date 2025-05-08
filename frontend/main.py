@@ -154,10 +154,6 @@ def inject_custom_css():
         
         /* Dark mode overrides */
         [data-theme="dark"] {
-            /* Main app background */
-            .stApp {
-                background-color: #0F172A !important;  /* Dark blue-gray */
-            }
 
             /* Main background stack */
             div.stApp,
@@ -210,6 +206,32 @@ def inject_custom_css():
         background-color: #475569 !important;
     }
 
+    /* Light theme */
+    div[data-testid="stVerticalBlock"] > div:has(> [data-testid="stVerticalBlockBorderWrapper"]) {
+        background-color: #F0F4F8 !important;  /* Light blue-gray */
+        border-radius: 12px;
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+
+    /* Dark theme override */
+    [data-theme="dark"] div[data-testid="stVerticalBlock"] > div:has(> [data-testid="stVerticalBlockBorderWrapper"]) {
+        background-color: #1E293B !important;  /* Dark slate */
+        border: 1px solid #334155 !important;
+    }
+
+    /* Scrollbar styling */
+    .chat-container::-webkit-scrollbar-thumb {
+        background-color: #94A3B8 !important;  /* Light mode scroll */
+    }
+
+    [data-theme="dark"] .chat-container::-webkit-scrollbar-thumb {
+        background-color: #475569 !important;  /* Dark mode scroll */
+    }
+    
+    div[data-testid="stVerticalBlock"][data-test-key="chat_container"] {
+        background-color: #475569 !important;
+    }
 
         
         </style>
@@ -309,7 +331,11 @@ def render_sidebar() -> None:
             st.caption("No chats yet. Click ➕ to start!")
         else:
             # Scrollable Chat List
-            chat_list_container = st.container(height=300, border=True)
+            chat_list_container = chat_container = st.container(
+                            height=500, 
+                            border=False,
+                            key="chat_container"  # Add this for better CSS targeting
+            )
             with chat_list_container:
                 # Sort by title or creation date if available and desired
                 # API currently sorts by created_at desc, let's use the order received
