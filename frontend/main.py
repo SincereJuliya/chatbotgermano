@@ -38,8 +38,8 @@ def inject_custom_css():
             with open(img_path, "rb") as f:
                 b64_img = base64.b64encode(f.read()).decode()
                 
-            st.info("Background image {img_path}")
-            if b64_img.exists():
+            st.writer("Background image {img_path}")
+            if b64_img is not None:
                 st.info("Background image exists")
             else: 
                 st.error("Background image not found!")
