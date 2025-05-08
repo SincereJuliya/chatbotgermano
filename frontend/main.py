@@ -230,7 +230,7 @@ def inject_custom_css():
     }
 
     div[data-testid="stVerticalBlock"][data-test-key="chat_container"] {
-        background-color: your-color !important;
+        background-color: #475569 !important;
     }
         
         </style>
