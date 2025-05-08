@@ -49,21 +49,21 @@ def inject_custom_css():
             color: #1E293B;
         }
         
-        /* Light theme 
+        /* Light theme */
         [data-theme="light"] div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"] {
             background-color: #E3F2FD !important;
             color: #1E4B8B !important;
             border-color: #BBDEFB !important;
-        }*/
+        }
 
-        /* Shared properties 
+        /* Shared properties */
         div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"] {
             border-radius: 8px !important;
             padding: 10px 15px !important;
             margin: 15px 0 !important;
             width: 100% !important;
             transition: all 0.2s ease !important;
-        }*/
+        }
 
         /* Chat container */
         .chat-container {
