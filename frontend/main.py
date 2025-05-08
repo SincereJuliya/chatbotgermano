@@ -120,7 +120,7 @@ def inject_custom_css():
         }
         
         /* Target only the specific button using its key */
-        button[kind="secondary"].stButton>button:first-child[id='text_chat_trigger']{
+        button[kind="primary"].stButton>button:first-child[id='text_chat_trigger']{
             background-color: #E3F2FD !important;
             border: 1px solid #BBDEFB !important;
             color: #1E4B8B !important;
@@ -132,7 +132,7 @@ def inject_custom_css():
         }
 
         /* Hover state for specific button */
-        button[kind="secondary"].stButton>button:first-child[id='text_chat_trigger']:hover {
+        button[kind="primary"].stButton>button:first-child[id='text_chat_trigger']:hover {
             background-color: #BBDEFB !important;
             color: #0D3C61 !important;
             border-color: #90CAF9 !important;
@@ -141,7 +141,7 @@ def inject_custom_css():
 
         /* Active state for specific button */
         /* div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"]:active { */
-        button[kind="secondary"].stButton>button:first-child[id='text_chat_trigger']:active {
+        button[kind="primary"].stButton>button:first-child[id='text_chat_trigger']:active {
             background-color: #90CAF9 !important;
             transform: translateY(1px);
         }
