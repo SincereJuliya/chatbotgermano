@@ -56,7 +56,7 @@ def inject_custom_css():
                     min-width: 100vw !important;
                 }*/
                 
-                [data-testid="stAppViewContainer"] > .main {
+                [data-testid="stMain] > .main {
                     background-image: url("https://raw.githubusercontent.com/SincereJuliya/chatbotgermano/refs/heads/frontdev/frontend/germanobook.jpg") !important;
                     background-size: 100vw 100vh;  # This sets the size to cover 100% of the viewport width and height
                     background-position: center;  
