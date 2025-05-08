@@ -352,7 +352,7 @@ def render_chat_area() -> None:
                     key="text_chat_trigger",  # This key is used in the CSS selector
                     on_click=create_new_chat,
                     help="Start a new chat",
-                    type="secondary"
+                    type="primary"
             )
     
 
