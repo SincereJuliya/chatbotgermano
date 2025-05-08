@@ -56,9 +56,9 @@ def inject_custom_css():
                     min-width: 100vw !important;
                 }
                 
-                [data-testid="stSidebar"] > div:first-child {{
+                [data-testid="stSidebar"]  > div:first-child {
                     background: url(data:image/jpeg;base64,{b64_img});
-                }}
+                }
                 
                 [data-theme="dark"] .stApp {
                     background: url(data:image/jpg;base64,{b64_img})!important;
