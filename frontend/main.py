@@ -47,13 +47,10 @@ def inject_custom_css():
                 background-position: center;
                 background-repeat: no-repeat;
                 background-attachment: fixed;
-                
-                /*background-color: #F8FAFC !important;  Changed from #FFFFFF to softer white 
-                color: #1E293B;*/
             }
             
             [data-theme="dark"] .stApp {
-                background: url(data:image/{gif};base64,{base64.b64encode(open("animated.gif", "rb").read()).decode()});
+                background: url(data:image/png;base64,{b64_img});
                 color: #1E293B;
             }
 
@@ -148,12 +145,12 @@ def inject_custom_css():
                 justify-content: center !important;
                 width: 100% !important;
             }
-            
+            /* 
             div.stApp > div[class*="block-container"],
             div[data-testid="stVerticalBlock"] {
                 max-width: none !important;
                 padding: 0 1rem !important;
-            }
+            }*/
             
             /* Dark mode overrides - works*/
             [data-theme="dark"] {
@@ -222,10 +219,6 @@ def inject_custom_css():
         /* Scrollbar styling */
         [data-theme="dark"] .chat-container::-webkit-scrollbar-thumb {
             background-color: #475569 !important;  /* Dark mode scroll */
-        }
-
-        div[data-testid="stVerticalBlock"][data-test-key="chat_container"] {
-            background-color: #475569 !important;
         }
             
             </style>
