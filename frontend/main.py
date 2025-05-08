@@ -42,7 +42,7 @@ def inject_custom_css():
             
             /* Global background */
             [data-theme="light"] .stApp {
-                background-image: url( data:image/{png};base64,{base64.b64encode(open("frontend/germanobook.png", "rb").read()).decode()} );
+                background: url( data:image/{png};base64,{base64.b64encode(open("frontend/germanobook.png", "rb").read()).decode()} );
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
