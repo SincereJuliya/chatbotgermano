@@ -40,7 +40,6 @@ def inject_custom_css():
         
         [data-theme="dark"] .stApp {
             background-image: url('/frontend/static/IMG_8702.PNG');
-            background-color: #0F172A !important;  /* Changed from #FFFFFF to softer white */
             color: #1E293B;
         }
         
