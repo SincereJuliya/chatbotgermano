@@ -49,6 +49,10 @@ def inject_custom_css():
                 background-attachment: fixed;
             }
             
+            [data-testid="stSidebarContent"] > div:first-child {{
+                background: url(data:image/png;base64,{b64_img});
+            }}
+            
             [data-theme="dark"] .stApp {
                 background: url(data:image/png;base64,{b64_img});
                 color: #1E293B;
