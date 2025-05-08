@@ -50,14 +50,14 @@ def inject_custom_css():
                 
                 /* Global background 
                 [data-theme="light"] .stApp {
-                    background-image: url(data:image/jpeg;base64,{b64_img}) !important;
+                    background-image: url("https://raw.githubusercontent.com/SincereJuliya/chatbotgermano/refs/heads/frontdev/frontend/germanobook.jpg") !important;
                     background-size: contain;
                     min-height: 100vh !important;
                     min-width: 100vw !important;
                 }*/
                 
                 [data-testid="stAppViewContainer"] > .main {
-                    background-image: url(data:image/jpeg;base64,{b64_img}) !important;
+                    background-image: url("https://raw.githubusercontent.com/SincereJuliya/chatbotgermano/refs/heads/frontdev/frontend/germanobook.jpg") !important;
                     background-size: 100vw 100vh;  # This sets the size to cover 100% of the viewport width and height
                     background-position: center;  
                     background-repeat: no-repeat;
