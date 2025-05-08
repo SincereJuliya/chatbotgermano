@@ -38,7 +38,7 @@ def inject_custom_css():
             with open(img_path, "rb") as f:
                 b64_img = base64.b64encode(f.read()).decode()
                 
-            st.info("Background image" + str(img_path) + " exists")
+            st.info("Background image " + str(img_path) + " exists")
             if b64_img is not None:
                 st.info("Background image exists")
             else: 
@@ -50,7 +50,7 @@ def inject_custom_css():
                 
                 /* Global background */
                 [data-theme="light"] .stApp {
-                    background-image: url(data:image/webp;base64,{b64_img});
+                    background: url(data:image/webp;base64,{b64_img});
                     background-size: contain;
                     background-position: center;
                     background-repeat: no-repeat;
@@ -59,7 +59,7 @@ def inject_custom_css():
                 }
                 
                 [data-testid="stSidebarContent"] > div:first-child {{
-                    background: url(data:image/png;base64,{b64_img});
+                    background: url(data:image/webp;base64,{b64_img});
                 }}
                 
                 [data-theme="dark"] .stApp {
