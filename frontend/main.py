@@ -49,21 +49,21 @@ def inject_custom_css():
             color: #1E293B;
         }
         
-        /* Light theme */
+        /* Light theme 
         [data-theme="light"] div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"] {
             background-color: #E3F2FD !important;
             color: #1E4B8B !important;
             border-color: #BBDEFB !important;
-        }
+        }*/
 
-        /* Shared properties */
+        /* Shared properties 
         div[data-testid="stButton"] > button[kind="secondary"][data-testid="baseButton-secondary"] {
             border-radius: 8px !important;
             padding: 10px 15px !important;
             margin: 15px 0 !important;
             width: 100% !important;
             transition: all 0.2s ease !important;
-        }
+        }*/
 
         /* Chat container */
         .chat-container {
@@ -163,7 +163,7 @@ def inject_custom_css():
             padding: 0 1rem !important;
         }
         
-        /* Dark mode overrides */
+        /* Dark mode overrides 
         [data-theme="dark"] {
             
             /* Chat container */
@@ -201,28 +201,28 @@ def inject_custom_css():
                 border-color: #3B82F6 !important;
                 color: #BFDBFE !important;
             }
-        }
+        }*/
 
-    /* Dark mode scrollbars */
+    /* Dark mode scrollbars 
     [data-theme="dark"]::-webkit-scrollbar-thumb {
         background-color: #475569 !important;
-    }
+    }*/
 
-    /* Light theme */
+    /* Light theme 
     div[data-testid="stVerticalBlock"] > div:has(> [data-testid="stVerticalBlockBorderWrapper"]) {
         background-color: #F0F4F8 !important;  /* Light blue-gray */
         border-radius: 12px;
         padding: 1rem;
         margin: 1rem 0;
-    }
+    }*/
 
-    /* Dark theme override */
+    /* Dark theme override 
     [data-theme="dark"] div[data-testid="stVerticalBlock"] > div:has(> [data-testid="stVerticalBlockBorderWrapper"]) {
         background-color: #1E293B !important;  /* Dark slate */
         border: 1px solid #334155 !important;
-    }
+    }*/
 
-    /* Scrollbar styling */
+    /* Scrollbar styling 
     .chat-container::-webkit-scrollbar-thumb {
         background-color: #94A3B8 !important;  /* Light mode scroll */
     }
@@ -233,7 +233,7 @@ def inject_custom_css():
 
     div[data-testid="stVerticalBlock"][data-test-key="chat_container"] {
         background-color: #475569 !important;
-    }
+    }*/
         
         </style>
     """, unsafe_allow_html=True)
