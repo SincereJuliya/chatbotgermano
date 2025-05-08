@@ -56,6 +56,13 @@ def inject_custom_css():
                     min-width: 100vw !important;
                 }
                 
+                [data-testid="stAppViewContainer"] > .main {
+                    background-image: url(data:image/jpeg;base64,{b64_img}) !important;
+                    background-size: 100vw 100vh;  # This sets the size to cover 100% of the viewport width and height
+                    background-position: center;  
+                    background-repeat: no-repeat;
+                }
+                
                 [data-testid="stSidebar"]  > div:first-child {
                     background: url(data:image/jpeg;base64,{b64_img});
                 }
