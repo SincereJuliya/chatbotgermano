@@ -31,205 +31,210 @@ from utils import(
 )
 
 def inject_custom_css():
-    # Encode image
-    img_path = Path("frontend/germanobook-optimized.png")
-    if img_path.exists():
-        with open(img_path, "rb") as f:
-            b64_img = base64.b64encode(f.read()).decode()
+    try:
+        # Encode image
+        img_path = Path("frontend/germanobook-optimized.png").parent / "germanobook-optimized.png"
+        if img_path.exists():
+            with open(img_path, "rb") as f:
+                b64_img = base64.b64encode(f.read()).decode()
+                    
+            st.markdown("""
+                <style>
                 
-        st.markdown("""
-            <style>
-            
-            /* Global background */
-            [data-theme="light"] .stApp {
-                background-image: url(data:image/png;base64,{b64_img});
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-            }
-            
-            [data-testid="stSidebarContent"] > div:first-child {{
-                background: url(data:image/png;base64,{b64_img});
-            }}
-            
-            [data-theme="dark"] .stApp {
-                background: url(data:image/png;base64,{b64_img});
-                color: #1E293B;
-            }
-
-            /* Chat container */
-            .chat-container {
-                padding: 1rem;
-                border-radius: 10px;
-            }
-
-            /* User message bubble */
-            .user-message {
-                background-color: #FFFFFF;
-                border: 1px solid #3B82F6;
-                color: #1E293B;
-                padding: 0.75rem 1rem;
-                border-radius: 12px;
-                margin-bottom: 0.5rem;
-                max-width: 85%;
-            }
-
-            /* Assistant message bubble */
-            .assistant-message {
-                background-color: #D0E8FF;
-                color: #1E293B;
-                padding: 0.75rem 1rem;
-                border-radius: 12px;
-                margin-bottom: 0.5rem;
-                max-width: 85%;
-            }
-
-            /* Buttons */
-            button[kind="primary"] {
-                background-color: #3B82F6 !important;
-                color: white !important;
-                border: none;
-                border-radius: 8px;
-            }
-
-            button[kind="primary"]:hover {
-                background-color: #2563EB !important;
-            }
-
-            /* Citations */
-            .citation {
-                background-color: #EDF6FF;
-                color: #1E293B;
-                padding: 2px 6px;
-                border-radius: 5px;
-                border-bottom: 2px dashed #3B82F6;
-                cursor: pointer;
-            }
-
-            /* Scrollbars, optional */
-            ::-webkit-scrollbar {
-                width: 6px;
-            }
-            ::-webkit-scrollbar-thumb {
-                background-color: #B3DAFF;
-                border-radius: 10px;
-            }
-            
-            /* Target only the specific button using its key */
-            button[kind="primary"].stButton>button:first-child[id='text_chat_trigger']{
-                background-color: #E3F2FD !important;
-                border: 1px solid #BBDEFB !important;
-                color: #1E4B8B !important;
-                border-radius: 8px;
-                display: block !important;
-                text-align: center !important;  /* Add this line */
-                padding: 20px 40px;           
-                margin: 20px 1rem !important;  /* Match header's side margins */
-                width: calc(100% - 2rem) !important;  /* Compensate for margins */
-                transition: all 0.2s ease;
-            }
-
-            /* Hover state for specific button */
-            button[kind="primary"].stButton>button:first-child[id='text_chat_trigger']:hover {
-                background-color: #BBDEFB !important;
-                color: #0D3C61 !important;
-                border-color: #90CAF9 !important;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-
-            /* Active state for specific button */
-            button[kind="primary"].stButton>button:first-child[id='text_chat_trigger']:active {
-                background-color: #90CAF9 !important;
-                transform: translateY(1px);
-            }
-            
-            div.stButton {
-                display: flex !important;
-                justify-content: center !important;
-                width: 100% !important;
-            }
-            /* 
-            div.stApp > div[class*="block-container"],
-            div[data-testid="stVerticalBlock"] {
-                max-width: none !important;
-                padding: 0 1rem !important;
-            }*/
-            
-            /* Dark mode overrides - works*/
-            [data-theme="dark"] {
+                /* Global background */
+                [data-theme="light"] .stApp {
+                    background-image: url(data:image/png;base64,{b64_img});
+                    background-size: contain;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-attachment: fixed;
+                    background-color: #ffffff;  /* Fallback color */
+                }
                 
+                [data-testid="stSidebarContent"] > div:first-child {{
+                    background: url(data:image/png;base64,{b64_img});
+                }}
+                
+                [data-theme="dark"] .stApp {
+                    background: url(data:image/png;base64,{b64_img});
+                    color: #1E293B;
+                }
+
                 /* Chat container */
                 .chat-container {
-                    background-color: #1E293B !important;
+                    padding: 1rem;
+                    border-radius: 10px;
                 }
 
                 /* User message bubble */
                 .user-message {
-                    background-color: #334155 !important;
-                    border-color: #475569 !important;
-                    color: #F8FAFC !important;
+                    background-color: #FFFFFF;
+                    border: 1px solid #3B82F6;
+                    color: #1E293B;
+                    padding: 0.75rem 1rem;
+                    border-radius: 12px;
+                    margin-bottom: 0.5rem;
+                    max-width: 85%;
                 }
 
                 /* Assistant message bubble */
                 .assistant-message {
-                    background-color: #1E40AF !important;  /* Dark blue */
-                    color: #E2E8F0 !important;
+                    background-color: #D0E8FF;
+                    color: #1E293B;
+                    padding: 0.75rem 1rem;
+                    border-radius: 12px;
+                    margin-bottom: 0.5rem;
+                    max-width: 85%;
                 }
 
-                /* Text colors */
-                .stMarkdown, .stText, .stChatMessage {
-                    color: #CBD5E1 !important;
-                } 
-
-                /* Primary button */
+                /* Buttons */
                 button[kind="primary"] {
+                    background-color: #3B82F6 !important;
+                    color: white !important;
+                    border: none;
+                    border-radius: 8px;
+                }
+
+                button[kind="primary"]:hover {
                     background-color: #2563EB !important;
-                    color: #E0F2FE !important;
                 }
 
-                /* Specific trigger button */
-                button[kind="primary"].stButton>button:first-child[id='text_chat_trigger'] {
-                    background-color: #1E3A8A !important;
-                    border-color: #3B82F6 !important;
-                    color: #BFDBFE !important;
+                /* Citations */
+                .citation {
+                    background-color: #EDF6FF;
+                    color: #1E293B;
+                    padding: 2px 6px;
+                    border-radius: 5px;
+                    border-bottom: 2px dashed #3B82F6;
+                    cursor: pointer;
                 }
+
+                /* Scrollbars, optional */
+                ::-webkit-scrollbar {
+                    width: 6px;
+                }
+                ::-webkit-scrollbar-thumb {
+                    background-color: #B3DAFF;
+                    border-radius: 10px;
+                }
+                
+                /* Target only the specific button using its key */
+                button[kind="primary"].stButton>button:first-child[id='text_chat_trigger']{
+                    background-color: #E3F2FD !important;
+                    border: 1px solid #BBDEFB !important;
+                    color: #1E4B8B !important;
+                    border-radius: 8px;
+                    display: block !important;
+                    text-align: center !important;  /* Add this line */
+                    padding: 20px 40px;           
+                    margin: 20px 1rem !important;  /* Match header's side margins */
+                    width: calc(100% - 2rem) !important;  /* Compensate for margins */
+                    transition: all 0.2s ease;
+                }
+
+                /* Hover state for specific button */
+                button[kind="primary"].stButton>button:first-child[id='text_chat_trigger']:hover {
+                    background-color: #BBDEFB !important;
+                    color: #0D3C61 !important;
+                    border-color: #90CAF9 !important;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                }
+
+                /* Active state for specific button */
+                button[kind="primary"].stButton>button:first-child[id='text_chat_trigger']:active {
+                    background-color: #90CAF9 !important;
+                    transform: translateY(1px);
+                }
+                
+                div.stButton {
+                    display: flex !important;
+                    justify-content: center !important;
+                    width: 100% !important;
+                }
+                /* 
+                div.stApp > div[class*="block-container"],
+                div[data-testid="stVerticalBlock"] {
+                    max-width: none !important;
+                    padding: 0 1rem !important;
+                }*/
+                
+                /* Dark mode overrides - works*/
+                [data-theme="dark"] {
+                    
+                    /* Chat container */
+                    .chat-container {
+                        background-color: #1E293B !important;
+                    }
+
+                    /* User message bubble */
+                    .user-message {
+                        background-color: #334155 !important;
+                        border-color: #475569 !important;
+                        color: #F8FAFC !important;
+                    }
+
+                    /* Assistant message bubble */
+                    .assistant-message {
+                        background-color: #1E40AF !important;  /* Dark blue */
+                        color: #E2E8F0 !important;
+                    }
+
+                    /* Text colors */
+                    .stMarkdown, .stText, .stChatMessage {
+                        color: #CBD5E1 !important;
+                    } 
+
+                    /* Primary button */
+                    button[kind="primary"] {
+                        background-color: #2563EB !important;
+                        color: #E0F2FE !important;
+                    }
+
+                    /* Specific trigger button */
+                    button[kind="primary"].stButton>button:first-child[id='text_chat_trigger'] {
+                        background-color: #1E3A8A !important;
+                        border-color: #3B82F6 !important;
+                        color: #BFDBFE !important;
+                    }
+                }
+
+            /* Dark mode scrollbars */
+            [data-theme="dark"]::-webkit-scrollbar-thumb {
+                background-color: #475569 !important;
             }
-
-        /* Dark mode scrollbars */
-        [data-theme="dark"]::-webkit-scrollbar-thumb {
-            background-color: #475569 !important;
-        }
-        
-        /* Light theme 
-        div[data-testid="stVerticalBlock"] > div:has(> [data-testid="stVerticalBlockBorderWrapper"]) {
-            background-color: #F0F4F8 !important;  /* Light blue-gray */
-            border-radius: 12px;
-            padding: 1rem;
-            margin: 1rem 0;
-        }*/
-
-        /* Dark theme override 
-        [data-theme="dark"] div[data-testid="stVerticalBlock"] > div:has(> [data-testid="stVerticalBlockBorderWrapper"]) {
-            background-color: #1E293B !important;  /* Dark slate */
-            border: 1px solid #334155 !important;
-        }*/
-
-        
-        .chat-container::-webkit-scrollbar-thumb {
-            background-color: #94A3B8 !important;  /* Light mode scroll */
-        }
-        
-        /* Scrollbar styling */
-        [data-theme="dark"] .chat-container::-webkit-scrollbar-thumb {
-            background-color: #475569 !important;  /* Dark mode scroll */
-        }
             
-            </style>
-        """, unsafe_allow_html=True)
-    
-    else:
-        st.error("Background image not found!") + str(img_path)
+            /* Light theme 
+            div[data-testid="stVerticalBlock"] > div:has(> [data-testid="stVerticalBlockBorderWrapper"]) {
+                background-color: #F0F4F8 !important;  /* Light blue-gray */
+                border-radius: 12px;
+                padding: 1rem;
+                margin: 1rem 0;
+            }*/
+
+            /* Dark theme override 
+            [data-theme="dark"] div[data-testid="stVerticalBlock"] > div:has(> [data-testid="stVerticalBlockBorderWrapper"]) {
+                background-color: #1E293B !important;  /* Dark slate */
+                border: 1px solid #334155 !important;
+            }*/
+
+            
+            .chat-container::-webkit-scrollbar-thumb {
+                background-color: #94A3B8 !important;  /* Light mode scroll */
+            }
+            
+            /* Scrollbar styling */
+            [data-theme="dark"] .chat-container::-webkit-scrollbar-thumb {
+                background-color: #475569 !important;  /* Dark mode scroll */
+            }
+                
+                </style>
+            """, unsafe_allow_html=True)
+        
+        else:
+            st.error("Background image not found!") + str(img_path)
+            
+    except Exception as e:
+        st.error(f"Image load error: {str(e)}")
 
 # --- Configuration ---
 _raw_url = st.secrets.get("API_URL", "").strip()
