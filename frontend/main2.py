@@ -308,7 +308,6 @@ def display_citation_modal(modal_instance: Modal) -> None:
                 st.session_state.documents_cache[citation_id] = docs # Store in cache
             print(f"2. display_citation_modal -> docs: {docs}")
 
-        #st.container(height=400, border=True)
         # Check if the modal is open and show the content
         if modal_instance.is_open():
             # Use the modal instance to display content
@@ -317,23 +316,23 @@ def display_citation_modal(modal_instance: Modal) -> None:
             st.markdown(f"### Citation ID: {citation_id}")
 
             # Display the documents in the modal
-        with modal_instance.container():
-            """ if docs:
-                for doc in docs:
-                    st.markdown(f"### {doc.get('title', 'Citation Detail')}")
-                    st.markdown(f"**Document ID:** `{doc.get('id', 'N/A')}`")
-                    st.write("**Content:**")
-                    # Use st.markdown with blockquote for better formatting
-                    st.markdown(f"> {doc.get('text', 'No content available.')}")
-            else:
-                # Error fetching or citation not found (API function handles toast/error)
-                st.warning(f"Could not load details for citation ID '{citation_id}'. It might not exist.")
+            with modal_instance.container():
+                """ if docs:
+                    for doc in docs:
+                        st.markdown(f"### {doc.get('title', 'Citation Detail')}")
+                        st.markdown(f"**Document ID:** `{doc.get('id', 'N/A')}`")
+                        st.write("**Content:**")
+                        # Use st.markdown with blockquote for better formatting
+                        st.markdown(f"> {doc.get('text', 'No content available.')}")
+                else:
+                    # Error fetching or citation not found (API function handles toast/error)
+                    st.warning(f"Could not load details for citation ID '{citation_id}'. It might not exist.")
 
-            # Button to close the modal AND reset the state variable
-            if st.button("Close Citation", key=f"cit_{citation_id}"):
-                st.session_state.show_citation_id = None
-                modal_instance.close()
-                st.rerun() # Rerun to reflect closed state """
+                # Button to close the modal AND reset the state variable
+                if st.button("Close Citation", key=f"cit_{citation_id}"):
+                    st.session_state.show_citation_id = None
+                    modal_instance.close()
+                    st.rerun() # Rerun to reflect closed state """
 
 def add_custom_css() -> None:
     """Add custom CSS for styling."""
