@@ -91,10 +91,7 @@ def initialize_app():
         title="Citation Details", # Set a relevant title
         key="citation-modal", # Unique key
         padding=20,
-        max_width=500,
-        closable=False,
-        overlay_click_closes=True,# Whether clicking the overlay closes modal
-        session_state_flag=None   # Optional session state var to control visibility
+        max_width=500
     )
     return modal
 
@@ -326,16 +323,10 @@ def display_citation_modal(modal_instance: Modal) -> None:
 
             st.divider()
             # Button to close the modal AND reset the state variable
-            if st.button("Close Citation", key=f"citation_{citation_id}"):
+            if st.button("Close Citation", key=f"cit_{citation_id}"):
                 st.session_state.show_citation_id = None
                 modal_instance.close()
                 st.rerun() # Rerun to reflect closed state
-                
-            # Close button (resets modal state)
-            if st.button("X", key="st-key-citation-modal-close"):
-                st.session_state.show_citation_id = None
-                modal_instance.close()
-                st.rerun()  # Force rerun to hide the modal
 
 def add_custom_css() -> None:
     """Add custom CSS for styling."""
