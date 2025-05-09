@@ -48,15 +48,15 @@ def inject_custom_css():
             st.markdown("""
                 <style>
                 
-                /* Global background 
+                /* Global background */
                 [data-theme="light"] .stApp {
                     background-image: url("https://raw.githubusercontent.com/SincereJuliya/chatbotgermano/refs/heads/frontdev/frontend/germanobook.jpg") !important;
                     background-size: contain;
                     min-height: 100vh !important;
                     min-width: 100vw !important;
-                }*/
+                }
                 
-                [data-testid="stMain] > .main {
+                [data-testid="stAppView"] > .main {
                     background-image: url("https://raw.githubusercontent.com/SincereJuliya/chatbotgermano/refs/heads/frontdev/frontend/germanobook.jpg") !important;
                     background-size: 100vw 100vh;  # This sets the size to cover 100% of the viewport width and height
                     background-position: center;  
