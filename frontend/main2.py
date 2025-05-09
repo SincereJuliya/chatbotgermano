@@ -309,7 +309,6 @@ def display_citation_modal(modal_instance: Modal) -> None:
             print(f"2. display_citation_modal -> docs: {docs}")
 
         with modal_instance.container():
-            st.button("X", key=f"close_doc_{doc['id']}", help="Close this document")
             if docs:
                 for doc in docs:
                     st.markdown(f"### {doc.get('title', 'Citation Detail')}")
@@ -359,13 +358,6 @@ def add_custom_css() -> None:
          }
     </style>
     """, unsafe_allow_html=True)
-
-# Listen for messages from JavaScript
-def handle_message():
-    if st.session_state.get('close_pressed'):
-        # Your close logic here
-        st.write("Modal closed!")
-        st.session_state.close_pressed = False  # Reset state
 
 # --- Main Application Execution ---
 def main() -> None:
