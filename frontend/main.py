@@ -514,6 +514,13 @@ def create_new_chat():
 
 def display_citation_modal(modal_instance: Modal) -> None:
     """Displays the modal with citation details if show_citation_id is set."""
+    st.button(
+                "X",
+                key="close_citation",  # This key is used in the CSS selector
+                on_click= lambda: (setattr(st.session_state, 'show_citation_id', None), modal_instance.close()),
+                help="Close the citation details",
+                type="secondary"
+            )
     # Check if we need to open the modal based on the state variable
     if st.session_state.show_citation_id and not modal_instance.is_open():
          modal_instance.open()
@@ -548,13 +555,6 @@ def display_citation_modal(modal_instance: Modal) -> None:
                 # Error fetching or citation not found (API function handles toast/error)
                 st.warning(f"Could not load details for citation ID '{citation_id}'. It might not exist.")
 
-            st.button(
-                "X",
-                key="close_citation",  # This key is used in the CSS selector
-                on_click= lambda: (setattr(st.session_state, 'show_citation_id', None), modal_instance.close(), st.rerun()),
-                help="Close the citation details",
-                type="secondary"
-            )
             st.divider()
             # Button to close the modal AND reset the state variable
             if st.button("Close Citation", key=f"close_citation_{citation_id}"):
