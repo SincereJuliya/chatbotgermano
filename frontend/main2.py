@@ -317,7 +317,7 @@ def display_citation_modal(modal_instance: Modal) -> None:
 
             # Display the documents in the modal
             with modal_instance.container():
-                """ if docs:
+                if docs:
                     for doc in docs:
                         st.markdown(f"### {doc.get('title', 'Citation Detail')}")
                         st.markdown(f"**Document ID:** `{doc.get('id', 'N/A')}`")
