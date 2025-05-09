@@ -308,7 +308,7 @@ def display_citation_modal(modal_instance: Modal) -> None:
                 st.session_state.documents_cache[citation_id] = docs # Store in cache
             print(f"2. display_citation_modal -> docs: {docs}")
 
-        with modal_instance.container():
+        """ with modal_instance.container():
             if docs:
                 for doc in docs:
                     st.markdown(f"### {doc.get('title', 'Citation Detail')}")
@@ -325,7 +325,7 @@ def display_citation_modal(modal_instance: Modal) -> None:
             if st.button("Close Citation", key=f"cit_{citation_id}"):
                 st.session_state.show_citation_id = None
                 modal_instance.close()
-                st.rerun() # Rerun to reflect closed state
+                st.rerun() # Rerun to reflect closed state """
 
 def add_custom_css() -> None:
     """Add custom CSS for styling."""
