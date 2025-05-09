@@ -238,6 +238,25 @@ def inject_custom_css():
         background-color: #475569 !important;
     }
         
+        
+    /* Target only the specific button using its key */
+    button[kind="secondary"].stButton>button:first-child[id='close_citation']{
+        transition: all 0.2s ease;
+    }
+
+        /* Hover state for specific button */
+    button[kind="secondary"].stButton>button:first-child[id='close_citation']:hover {
+        background-color: #BBDEFB !important;
+        color: #0D3C61 !important;
+        border-color: #90CAF9 !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+        /* Active state for specific button */
+    button[kind="secondary"].stButton>button:first-child[id='close_citation']:active {
+        background-color: #90CAF9 !important;
+        transform: translateY(1px);
+    }
         </style>
     """, unsafe_allow_html=True)
 
@@ -529,9 +548,16 @@ def display_citation_modal(modal_instance: Modal) -> None:
                 # Error fetching or citation not found (API function handles toast/error)
                 st.warning(f"Could not load details for citation ID '{citation_id}'. It might not exist.")
 
+            st.button(
+                "X",
+                key="close_citation",  # This key is used in the CSS selector
+                on_click= lambda: (setattr(st.session_state, 'show_citation_id', None), modal_instance.close(), st.rerun()),
+                help="Close the citation details",
+                type="secondary"
+            )
             st.divider()
             # Button to close the modal AND reset the state variable
-            if st.button("Close Citation", key=f"close_citation_{citation_id}") or st.button("X", key="close_citation_{citation_id}", help="Close this panel"):
+            if st.button("Close Citation", key=f"close_citation_{citation_id}"):
                 st.session_state.show_citation_id = None
                 modal_instance.close()
                 st.rerun() # Rerun to reflect closed state
