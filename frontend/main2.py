@@ -308,7 +308,7 @@ def display_citation_modal(modal_instance: Modal) -> None:
                 st.session_state.documents_cache[citation_id] = docs # Store in cache
             print(f"2. display_citation_modal -> docs: {docs}")
 
-        st.container(height=400, border=True)
+        #st.container(height=400, border=True)
         # Check if the modal is open and show the content
         if modal_instance.is_open():
             # Use the modal instance to display content
