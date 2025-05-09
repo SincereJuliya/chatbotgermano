@@ -316,6 +316,7 @@ def display_citation_modal(modal_instance: Modal) -> None:
                     st.write("**Content:**")
                     # Use st.markdown with blockquote for better formatting
                     st.markdown(f"> {doc.get('text', 'No content available.')}")
+                    st.button("Close", key=f"close_doc_{doc['id']}", help="Close this document")
             else:
                 # Error fetching or citation not found (API function handles toast/error)
                 st.warning(f"Could not load details for citation ID '{citation_id}'. It might not exist.")
