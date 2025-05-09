@@ -531,7 +531,7 @@ def display_citation_modal(modal_instance: Modal) -> None:
 
             st.divider()
             # Button to close the modal AND reset the state variable
-            if st.button("Close Citation", key=f"close_citation_{citation_id}"):
+            if st.button("Close Citation", key=f"close_citation_{citation_id}") or st.button("X", key="close_citation_{citation_id}", help="Close this panel"):
                 st.session_state.show_citation_id = None
                 modal_instance.close()
                 st.rerun() # Rerun to reflect closed state
