@@ -37,8 +37,8 @@ function findAndBindCloseButton() {
     
     const callback = (mutationsList, observer) => {
         const closeBtn = document.querySelector(
-            'button[data-testid="stBaseButton-secondary"] div p:contains("X")'
-        )?.closest('button');
+        '.stElementContainer.element-container.st-key-citation-modal-close'
+        );
         
         if (closeBtn && !closeBtn.dataset.bound) {
             closeBtn.dataset.bound = "true";
