@@ -382,7 +382,7 @@ def main() -> None:
 
     # Add custom CSS
     add_custom_css()
-    load_css("styles.css")
+    load_css("frontend/styles.css")
 
     # Render UI components
     render_header()
