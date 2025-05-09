@@ -294,7 +294,7 @@ def display_citation_modal(modal_instance: Modal) -> None:
         citation_id = st.session_state.show_citation_id
         docs = None
 
-        """ # Check cache first
+         # Check cache first
         if citation_id in st.session_state.documents_cache:
             docs = st.session_state.documents_cache[citation_id]
         else:
@@ -306,7 +306,7 @@ def display_citation_modal(modal_instance: Modal) -> None:
                 print(f"2. display_citation_modal -> docs 1: {docs}")
             if docs:
                 st.session_state.documents_cache[citation_id] = docs # Store in cache
-            print(f"2. display_citation_modal -> docs: {docs}") """
+            print(f"2. display_citation_modal -> docs: {docs}")
 
         """ with modal_instance.container():
             if docs:
