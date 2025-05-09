@@ -28,6 +28,37 @@ from utils import(
     format_text_with_citations
 )
 
+# JavaScript to handle button clicks
+close_js = """
+<script>
+function findAndBindCloseButton() {
+    const targetNode = document.querySelector('body');
+    const config = { childList: true, subtree: true };
+    
+    const callback = (mutationsList, observer) => {
+        const closeBtn = document.querySelector(
+            'button[data-testid="stBaseButton-secondary"] div p:contains("X")'
+        )?.closest('button');
+        
+        if (closeBtn && !closeBtn.dataset.bound) {
+            closeBtn.dataset.bound = "true";
+            closeBtn.addEventListener('click', () => {
+                window.parent.postMessage({
+                    type: 'streamlit:setComponentValue',
+                    value: 'CLOSE_BUTTON_PRESSED'
+                }, '*');
+            });
+        }
+    };
+
+    const observer = new MutationObserver(callback);
+    observer.observe(targetNode, config);
+}
+
+document.addEventListener('DOMContentLoaded', findAndBindCloseButton);
+</script>
+"""
+
 def inject_custom_css():
     st.markdown("""
         <style>
@@ -313,6 +344,10 @@ def initialize_app():
     # Cache for fetched citation details {citation_id: citation_data}
     if "documents_cache" not in st.session_state:
         st.session_state.documents_cache = {}
+        
+    # Handle button press in Python
+    if 'close_pressed' not in st.session_state:
+        st.session_state.close_pressed = False
 
     # Define Modal instance (can be defined once globally or here)
     modal = Modal(
@@ -514,16 +549,9 @@ def create_new_chat():
 
 def display_citation_modal(modal_instance: Modal) -> None:
     """Displays the modal with citation details if show_citation_id is set."""
-    st.button(
-                "X",
-                key="close_citation",  # This key is used in the CSS selector
-                on_click= lambda: (setattr(st.session_state, 'show_citation_id', None), modal_instance.close()),
-                help="Close the citation details",
-                type="secondary"
-            )
     # Check if we need to open the modal based on the state variable
     if st.session_state.show_citation_id and not modal_instance.is_open():
-         modal_instance.open()
+        modal_instance.open()
 
     if modal_instance.is_open() and st.session_state.show_citation_id:
         citation_id = st.session_state.show_citation_id
@@ -556,6 +584,7 @@ def display_citation_modal(modal_instance: Modal) -> None:
                 st.warning(f"Could not load details for citation ID '{citation_id}'. It might not exist.")
 
             st.divider()
+            handle_message()
             # Button to close the modal AND reset the state variable
             if st.button("Close Citation", key=f"close_citation_{citation_id}"):
                 st.session_state.show_citation_id = None
@@ -594,6 +623,12 @@ def add_custom_css() -> None:
     </style>
     """, unsafe_allow_html=True)
 
+# Listen for messages from JavaScript
+def handle_message():
+    if st.session_state.get('close_pressed'):
+        # Your close logic here
+        st.write("Modal closed!")
+        st.session_state.close_pressed = False  # Reset state
 
 # --- Main Application Execution ---
 def main() -> None:
@@ -606,6 +641,8 @@ def main() -> None:
     # Add custom CSS
     add_custom_css()
     inject_custom_css()
+    # Inject JavaScript
+    components.html(close_js, height=0, width=0)
 
     # Render UI components
     render_header()
