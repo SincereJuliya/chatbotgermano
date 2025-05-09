@@ -91,7 +91,10 @@ def initialize_app():
         title="Citation Details", # Set a relevant title
         key="citation-modal", # Unique key
         padding=20,
-        max_width=700
+        max_width=500,
+        closable=False,
+        overlay_click_closes=True,# Whether clicking the overlay closes modal
+        session_state_flag=None   # Optional session state var to control visibility
     )
     return modal
 
@@ -309,6 +312,7 @@ def display_citation_modal(modal_instance: Modal) -> None:
             print(f"2. display_citation_modal -> docs: {docs}")
 
         with modal_instance.container():
+            st.button("X", key=f"close_doc_{doc['id']}", help="Close this document")
             if docs:
                 for doc in docs:
                     st.markdown(f"### {doc.get('title', 'Citation Detail')}")
@@ -316,7 +320,6 @@ def display_citation_modal(modal_instance: Modal) -> None:
                     st.write("**Content:**")
                     # Use st.markdown with blockquote for better formatting
                     st.markdown(f"> {doc.get('text', 'No content available.')}")
-                    st.button("Close", key=f"close_doc_{doc['id']}", help="Close this document")
             else:
                 # Error fetching or citation not found (API function handles toast/error)
                 st.warning(f"Could not load details for citation ID '{citation_id}'. It might not exist.")
