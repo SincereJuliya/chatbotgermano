@@ -1,12 +1,14 @@
 /* Global background */
 .stApp {
     background-color: #ffffff !important;
+    color-scheme: "Light";
     color: #1E293B;
 }
 
-[data-theme="dark"] .stApp {
+.stApp {
     background-color: #0F172A !important;
     /* Changed from #FFFFFF to softer white */
+    color-scheme: "Dark";
     color: #1E293B;
 }
 
