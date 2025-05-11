@@ -4,8 +4,7 @@ streamlit
 cohere
 hnswlib
 chromadb
-unstructured
-unstructured[pdf]
+# unstructured[pdf]
 pymupdf # Similar to unstructured, but also helps with highlighting
 langchain
 python-dotenv

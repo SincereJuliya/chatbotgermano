@@ -1,8 +1,8 @@
 import os
 # import uuid
 import typing as tp
-from unstructured.partition.html import partition_html
-from unstructured.chunking.title import chunk_by_title
+#from unstructured.partition.html import partition_html
+#from unstructured.chunking.title import chunk_by_title
 from sqlalchemy import create_engine, text
 import sqlparse
 import mysql

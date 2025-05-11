@@ -4,8 +4,8 @@ import cohere
 # import uuid
 import hnswlib
 from typing import List, Dict
-from unstructured.partition.html import partition_html
-from unstructured.chunking.title import chunk_by_title
+#from unstructured.partition.html import partition_html
+#from unstructured.chunking.title import chunk_by_title
 from tqdm import tqdm
 
 import logging
