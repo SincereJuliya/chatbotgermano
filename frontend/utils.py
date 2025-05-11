@@ -279,7 +279,7 @@ def format_text_with_citations(text: str, citations: List[dict]) -> str:
 
         span_html = (
             f'<span class="citation" data-citation-id="{citation_id}" '
-            f'style="font-size: 14px; background-color: #ADD8E6; color: black; padding: 2px 4px; '
+            f'style="font-size: 14px; background-color: #cbf2ff57; color: black; padding: 2px 4px; '
             f'border-radius: 3px; border-bottom: 2px dashed #007bff; cursor: pointer;">'
             f'{(cited_text)}[{citation_id}]</span>'
         )

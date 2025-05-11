@@ -1,7 +1,8 @@
 /* Global background */
 .stApp {
-    background-color: #fcfeff !important;
-    /* #F8FAFC !important;
+    background-color: #94fff157;
+    color-scheme: "Light";/*#fcfeff !important;
+     #F8FAFC !important;
     Changed from #FFFFFF to softer white */
     color: #1E293B;
 }
