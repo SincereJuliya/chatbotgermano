@@ -145,7 +145,7 @@ div[data-testid="stVerticalBlock"] {
 }
 
 /* Light mode default */
-.custom-text-block {
+[data-theme="light"] .custom-text-block {
     color: #31333F;
     font-family: sans-serif;
     font-size: 14px;
@@ -160,6 +160,13 @@ div[data-testid="stVerticalBlock"] {
 [data-theme="dark"] .custom-text-block {
     color: #F8FAFC !important;
     color-scheme: dark;
+    font-family: sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    margin: 0 0 16px 0;
+    padding: 0;
+    word-break: break-word;
 }
 
 /* Dark mode overrides */
