@@ -1,0 +1,333 @@
+/* Global background */
+[data-theme="light"] .stApp {
+    background-color: #F8FAFC !important;
+    /* Changed from #FFFFFF to softer white */
+    color: #1E293B;
+}
+
+[data-theme="dark"] .stApp {
+    background-color: #0F172A !important;
+    /* Changed from #FFFFFF to softer white */
+    color: #1E293B;
+}
+
+/* Light theme */
+[data-theme="light"] div[data-testid="stButton"]>button[kind="secondary"][data-testid="baseButton-secondary"] {
+    background-color: #E3F2FD !important;
+    color: #1E4B8B !important;
+    border-color: #BBDEFB !important;
+}
+
+/* Shared properties 
+div[data-testid="stButton"]>button[kind="secondary"][data-testid="baseButton-secondary"] {
+    border-radius: 8px !important;
+    padding: 10px 15px !important;
+    margin: 15px 0 !important;
+    width: 100% !important;
+    transition: all 0.2s ease !important;
+}*/
+
+/* Chat container */
+.chat-container {
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+/* User message bubble */
+.user-message {
+    background-color: #FFFFFF;
+    border: 1px solid #3B82F6;
+    color: #1E293B;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+    max-width: 85%;
+}
+
+/* Assistant message bubble */
+.assistant-message {
+    background-color: #D0E8FF;
+    color: #1E293B;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+    max-width: 85%;
+}
+
+/* Buttons */
+button[kind="primary"] {
+    background-color: #3B82F6 !important;
+    color: white !important;
+    border: none;
+    border-radius: 8px;
+}
+
+button[kind="primary"]:hover {
+    background-color: #2563EB !important;
+}
+
+/* Citations */
+.citation {
+    background-color: #EDF6FF;
+    color: #1E293B;
+    padding: 2px 6px;
+    border-radius: 5px;
+    border-bottom: 2px dashed #3B82F6;
+    cursor: pointer;
+}
+
+/* Scrollbars, optional */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #B3DAFF;
+    border-radius: 10px;
+}
+
+/* Target only the specific button using its key */
+button[kind="primary"].stButton>button:first-child[id='text_chat_trigger'] {
+    background-color: #E3F2FD !important;
+    border: 1px solid #BBDEFB !important;
+    color: #1E4B8B !important;
+    border-radius: 8px;
+    display: block !important;
+    text-align: center !important;
+    /* Add this line */
+    padding: 20px 40px;
+    margin: 20px 1rem !important;
+    /* Match header's side margins */
+    width: calc(100% - 2rem) !important;
+    /* Compensate for margins */
+    transition: all 0.2s ease;
+}
+
+/* Hover state for specific button */
+button[kind="primary"].stButton>button:first-child[id='text_chat_trigger']:hover {
+    background-color: #BBDEFB !important;
+    color: #0D3C61 !important;
+    border-color: #90CAF9 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Active state for specific button */
+button[kind="primary"].stButton>button:first-child[id='text_chat_trigger']:active {
+    background-color: #90CAF9 !important;
+    transform: translateY(1px);
+}
+
+div.stButton {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
+
+div.stApp>div[class*="block-container"],
+div[data-testid="stVerticalBlock"] {
+    max-width: none !important;
+    padding: 0 1rem !important;
+}
+
+[data-theme="dark"] .stText,
+[data-theme="dark"] .stTextInput,
+[data-theme="dark"] .stChatMessage,
+[data-theme="dark"] label,
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+    color: #F8FAFC !important;
+}
+
+/* Light mode default */
+[data-theme="light"] .custom-text-block {
+    color: #31333F;
+    letter-spacing: 0.01em;
+    line-height: 1.6;
+    box-sizing: border-box;
+    color-scheme: light;
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0 0 16px 0;
+    padding: 0;
+    word-break: break-word;
+}
+
+/* Dark mode override */
+[data-theme="dark"] .custom-text-block {
+    color: #F8FAFC !important;
+    letter-spacing: 0.01em;
+    line-height: 1.6;
+    box-sizing: border-box;
+    color-scheme: light;
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0 0 16px 0;
+    padding: 0;
+    word-break: break-word;
+}
+
+/* Dark mode overrides */
+[data-theme="dark"] {
+
+    /* Main background stack */
+    div.stApp,
+    div.stApp>div,
+    div.stAppViewContainer,
+    section.stMain {
+        background-color: #0F172A !important;
+        /* Or your preferred dark color */
+        color: #E2E8F0 !important;
+        /* Light text */
+    }
+
+    /* Chat container */
+    .chat-container {
+        background-color: #1E293B !important;
+    }
+
+    /* User message bubble */
+    .user-message {
+        background-color: #334155 !important;
+        border-color: #475569 !important;
+        color: #F8FAFC !important;
+    }
+
+    /* Assistant message bubble */
+    .assistant-message {
+        background-color: #1E40AF !important;
+        /* Dark blue */
+        color: #E2E8F0 !important;
+    }
+
+    /* Text colors */
+    .stMarkdown,
+    .stText,
+    .stChatMessage {
+        color: #CBD5E1 !important;
+    }
+
+    /* Primary button */
+    button[kind="primary"] {
+        background-color: #2563EB !important;
+        color: #E0F2FE !important;
+    }
+
+    /* Specific trigger button */
+    button[kind="primary"].stButton>button:first-child[id='text_chat_trigger'] {
+        background-color: #1E3A8A !important;
+        border-color: #3B82F6 !important;
+        color: #BFDBFE !important;
+    }
+}
+
+/* Dark mode scrollbars */
+[data-theme="dark"]::-webkit-scrollbar-thumb {
+    background-color: #475569 !important;
+}
+
+/* Light theme */
+div[data-testid="stVerticalBlock"]>div:has(> [data-testid="stVerticalBlockBorderWrapper"]) {
+    background-color: #F0F4F8 !important;
+    /* Light blue-gray */
+    border-radius: 12px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+/* Dark theme override */
+[data-theme="dark"] div[data-testid="stVerticalBlock"]>div:has(> [data-testid="stVerticalBlockBorderWrapper"]) {
+    background-color: #1E293B !important;
+    /* Dark slate */
+    border: 1px solid #334155 !important;
+}
+
+/* Scrollbar styling */
+.chat-container::-webkit-scrollbar-thumb {
+    background-color: #94A3B8 !important;
+    /* Light mode scroll */
+}
+
+[data-theme="dark"] .chat-container::-webkit-scrollbar-thumb {
+    background-color: #475569 !important;
+    /* Dark mode scroll */
+}
+
+div[data-testid="stVerticalBlock"][data-test-key="chat_container"] {
+    background-color: #475569 !important;
+}
+
+
+/* Target only the specific button using its key */
+button[kind="secondary"].stButton>button:first-child[id='close_citation'] {
+    transition: all 0.2s ease;
+}
+
+/* Hover state for specific button */
+button[kind="secondary"].stButton>button:first-child[id='close_citation']:hover {
+    background-color: #BBDEFB !important;
+    color: #0D3C61 !important;
+    border-color: #90CAF9 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Active state for specific button */
+button[kind="secondary"].stButton>button:first-child[id='close_citation']:active {
+    background-color: #90CAF9 !important;
+    transform: translateY(1px);
+}
+
+.close-button>button {
+    background: none;
+    color: black;
+    border: none;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.stColumn.st-emotion-cache-1mhbupt {
+    position: relative;
+}
+
+.stColumn.st-emotion-cache-1mhbupt .close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+button[id^="trigger-button-"] {
+    display: none !important;
+}
+
+/* Style for the clickable citation span */
+.citation {
+    display: none; /* Completely removes the citation */
+}
+
+
+button[kind="secondary"].stButton>button:first-child[id^='trigger-button-'] {
+    display: none; /* Hides button but keeps space in layout */
+}
+
+button[key^='trigger-button-'] {
+    display: none; /* Hides button but keeps space in layout */
+    /* Alternatively, use display: none to remove it completely */
+}
+
+/* Hide or minimize the trigger buttons */
+button[id^='trigger-button-'] {
+    display: none; 
+}
+
+/* Hide button on hover (Option 4) */
+button[id^='trigger-button-']:hover {
+    visibility: hidden; /* Hide on hover */
+}

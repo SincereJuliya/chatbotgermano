@@ -1,22 +1,8 @@
-# python version 3.13.3
-cohere
-hnswlib
-chromadb
-unstructured
-unstructured[pdf]
-pymupdf # Similar to unstructured, but also helps with highlighting
-langchain
-python-dotenv
-numpy
-pandas
-mysql-connector-python
-sqlalchemy
-mysqlclient
-sqlparse
-
+# Frontend (Streamlit UI)
+streamlit
 streamlit-modal
-# streamlit-option-menu # For navbar
-# streamlit-navigation-bar # Another option for navbar -> better
-# hydralit_components
 streamlit-navigation-bar
 st-theme
+requests
+python-dotenv
+markdown
