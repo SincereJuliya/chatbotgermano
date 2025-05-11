@@ -57,12 +57,16 @@ def render_text_with_citations(text: str):
             spans.forEach(span => {{
                 span.addEventListener('click', () => {{
                     const citationId = span.getAttribute('data-citation-id');
+                    
                     const lol = `[class*="trigger-button-${{citationId}}"]`;
+                    
                     const hiddenInput = window.parent.document.querySelector(lol);
+                    
                     const button = hiddenInput.querySelector('button');
                     if (button) {{
                         button.click();
                     }}
+                    
                 }});
             }});
             

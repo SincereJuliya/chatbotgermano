@@ -288,6 +288,7 @@ def format_text_with_citations(text: str, citations: List[dict]) -> str:
         # txt = txt[:start] + span_html + txt[end:]
         txt = txt.replace(cited_text, span_html, 1)
         
+    st.info(txt)
     # Process bullet points: turn `* **` into actual <ul> and <li> elements
     txt = re.sub(r'^\*\s\*\*(.*?)\*\*', r'<ul><li>\1</li></ul>', txt, flags=re.MULTILINE)
     # Process bullet points: convert `*` into actual <ul> and <li> HTML elements
