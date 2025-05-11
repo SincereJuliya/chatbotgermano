@@ -50,7 +50,7 @@ def render_text_with_citations(text: str):
     
     # Inject JavaScript to handle the click event on citation spans
     components.html(f"""
-    <div style = "color: #31333F; letter-spacing: 0.01em;line-height: 1.6;font-family: sans-serif;font-size: 14px;font-weight: 400;margin: 0 0 16px 0;padding: 0;word-break: break-word;">{text}</div>
+    <div class = "custom-text-block">{text}</div>
     <script>
         window.onload = function() {{
             const spans = document.querySelectorAll('span[data-citation-id]');
