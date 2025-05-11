@@ -404,7 +404,7 @@ def main() -> None:
     initialize_app()
 
     # Add custom CSS
-    load_css("styles.css")
+    load_css("frontend/styles.css")
 
     # Render UI components
     render_header()
