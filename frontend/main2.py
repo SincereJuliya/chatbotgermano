@@ -50,7 +50,7 @@ def render_text_with_citations(text: str):
     
     # Inject JavaScript to handle the click event on citation spans
     components.html(f"""
-    <div class="custom-text-block">{text}</div>
+    <div style = "color: #31333F; letter-spacing: 0.01em;line-height: 1.6;font-family: sans-serif;font-size: 14px;font-weight: 400;margin: 0 0 16px 0;padding: 0;word-break: break-word;">{text}</div>
     <script>
         window.onload = function() {{
             const spans = document.querySelectorAll('span[data-citation-id]');
@@ -89,21 +89,6 @@ def load_css(file_path):
     with open(file_path, "r") as f:
         css = f.read()
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
-    
-st.info(st.get_option("theme.primaryColor"))
-
-if st.get_option("theme.backgroundColor") == "#ffffff":
-    st.markdown(
-        """
-        <style>
-            .stApp {
-                background-color: #40a6fa !important;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-else:  load_css("frontend/styles.css");
 
 # --- Streamlit Modal Setup ---
 # Define Modal instance (can be defined once globally or here)
