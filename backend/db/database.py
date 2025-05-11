@@ -2,7 +2,7 @@
 from html import escape
 import os
 import re
-from sqlalchemy import create_engine, Column, String, Text, TIMESTAMP, Integer, ForeignKey, MetaData, Table
+from sqlalchemy import create_engine, Column, String(255), Text, TIMESTAMP, Integer, ForeignKey, MetaData, Table
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.sql import func
 import datetime
@@ -27,26 +27,26 @@ Base = declarative_base()
 
 class ChatSession(Base):
     __tablename__ = "chat_sessions"
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    title = Column(String, nullable=False)
+    id = Column(String(3), primary_key=True, default=lambda: str(uuid.uuid4()))
+    title = Column(String(255), nullable=False)
     created_at = Column(TIMESTAMP, server_default=func.now())
 
 class Message(Base):
     __tablename__ = "messages"
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     session_id = Column(Integer, ForeignKey("chat_sessions.id"), nullable=False, index=True)
-    role = Column(String, nullable=False) # 'user' or 'assistant'
+    role = Column(String(9), nullable=False) # 'user' or 'assistant'
     content = Column(Text, nullable=False)
     timestamp = Column(TIMESTAMP, server_default=func.now())
-    ai_model = Column(String, nullable=True)
-    link = Column(String, nullable=True)
+    ai_model = Column(String(10), nullable=True)
+    link = Column(String(255), nullable=True)
 
 class Citation(Base):
     __tablename__ = "citations"
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     msg_id = Column(Integer, ForeignKey("messages.id"), nullable=False, index=True)
     # List of document IDs associated with this citation
-    doc_ids = Column(String, nullable=False) # Store as comma-separated string
+    doc_ids = Column(Text, nullable=False) # Store as comma-separated String(255)
     start = Column(Integer, nullable=True) # Start index of the citation in the document text
     end = Column(Integer, nullable=True) # End index of the citation in the document text
     text = Column(Text, nullable=False)
