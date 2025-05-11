@@ -5,3 +5,5 @@ streamlit-navigation-bar
 st-theme
 requests
 python-dotenv
+markdown
+math
