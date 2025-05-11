@@ -403,17 +403,16 @@ def main() -> None:
     # Initialize app (sets config, state vars, fetches initial sessions)
     initialize_app()
 
-    # Add custom CSS
-    load_css("frontend/styles.css")
-
     # Render UI components
     render_header()
     render_sidebar()
     render_chat_area()
-    
 
     # Handle Citation Modal Display (check state and render if needed)
     display_citation_modal()
+    
+    # Add custom CSS
+    load_css("frontend/styles.css")
 
 if __name__ == "__main__":
     main()
