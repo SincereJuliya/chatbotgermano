@@ -90,6 +90,19 @@ def load_css(file_path):
         css = f.read()
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
+if st.get_option("theme.base") == "light":
+    st.markdown(
+        """
+        <style>
+            .stApp {
+                background-color: #40a6fa !important;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+else:  load_css("frontend/styles.css");
+
 # --- Streamlit Modal Setup ---
 # Define Modal instance (can be defined once globally or here)
 modal = Modal(
