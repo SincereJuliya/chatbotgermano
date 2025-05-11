@@ -6,4 +6,3 @@ st-theme
 requests
 python-dotenv
 markdown
-math
