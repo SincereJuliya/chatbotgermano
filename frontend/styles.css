@@ -145,7 +145,7 @@ div[data-testid="stVerticalBlock"] {
 
 /* Light mode default */
 .custom-text-block {
-    color: #31333F;
+    color: #5a6e99;
     letter-spacing: 0.01em;
     line-height: 1.6;
     color-scheme: "Light";
@@ -159,7 +159,7 @@ div[data-testid="stVerticalBlock"] {
 
 /* Dark mode override */
 .custom-text-block {
-    color: #ffffff !important;
+    color: #e7effc !important;
     letter-spacing: 0.01em;
     line-height: 1.6;
     font-family: sans-serif;
