@@ -289,7 +289,7 @@ def render_chat_message(message: Dict, index: int) -> None:
 def render_chat_area() -> None:
     """Render the main chat area including messages and input."""
     chat_container = st.container(
-                            height=600, # Set a fixed height for the chat area
+                            height=500, # Set a fixed height for the chat area
                             border=False,
                             key="chat_container"  # Add this for better CSS targeting
     )
