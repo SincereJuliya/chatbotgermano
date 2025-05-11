@@ -1,6 +1,6 @@
 # crud.py
 from sqlalchemy.orm import Session
-from db import models, database
+from backend.db import models, database
 import uuid
 from datetime import datetime
 from typing import Any, Dict, List, Optional

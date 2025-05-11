@@ -3,10 +3,10 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import Any, Dict, List
 
-from core.chat_engine import Chatbot
-from db import crud, models, database
-from db.mysql_v1 import MYSQL
-from core.vectorstore import Vectorstore
+from backend.core.chat_engine import Chatbot
+from backend.db import crud, models, database
+from backend.db.mysql_v1 import MYSQL
+from backend.core.vectorstore import Vectorstore
 
 router = APIRouter(
     prefix="/sessions", # Base path for routes in this file
@@ -93,11 +93,11 @@ def create_new_message(
     # store user data and generate and store assistant data concurrently/simultaneously
     _ = crud.create_message(db=db, session_id=session_id, message=message)
     
-    assistant_response = database.get_mock_llm_response(message.content) 
-    citations = []
-    if not assistant_response:
-        assistant_response, citations, _ = chatbot.chat(message.content)
-        print(f"\ncreate_new_message -> Citations: {citations}\n")
+    # assistant_response = database.get_mock_llm_response(message.content) 
+    # citations = []
+    # if not assistant_response:
+    assistant_response, citations, _ = chatbot.chat(message.content)
+    print(f"\ncreate_new_message -> Citations: {citations}\n")
     
     # print(f"\nCitations: {citations}\n")
     

@@ -1,8 +1,8 @@
 import os
 import typing as tp
 from tqdm import tqdm
-from core.vectorstore import Vectorstore
-from db.mysql_v1 import MYSQL
+from backend.core.vectorstore import Vectorstore
+from backend.db.mysql_v1 import MYSQL
 import cohere
 from cohere.types.chat_citation import ChatCitation
 
@@ -28,6 +28,49 @@ class Chatbot:
         self.llm = cohere.Client(COHERE_API_KEY) # Get your API key here: https://dashboard.cohere.com/api-keys
         self.chat_history: list = []
         
+        self.ANSWER_SYSTEM_PROMPT = """
+You are a helpful, knowledgeable, and honest AI assistant named 'Chatbot Germano'. You must always refer to yourself as 'Chatbot Germano'.
+Your primary function is to answer user queries accurately and concisely.
+
+**Processing Instructions:**
+1.  Before providing a response, internally process the user's request step-by-step to fully understand it.
+2.  If the user's message contains multiple distinct questions or requests, break them down into individual, manageable components. Address each component systematically in your response.
+
+**Core Directive:** Answer the user's query **strictly using the provided context whenever possible**.
+
+**Citation Requirement:**
+* When you use information from the context documents, you **must always cite it**. **Do not fabricate or hallucinate anything**.
+
+**Response Protocol:**
+* **If the answer is found in the provided context:** Respond with citations grounded in the context.
+* **If the answer is NOT found in the provided context (or context is empty):** **You must first clearly state that your answer is NOT grounded in the provided documents**. Then, provide an answer based on your general knowledge if possible.
+* **If you cannot answer the question** (even with general knowledge), or if the question is unclear or inappropriate: Politely state that you cannot answer based on the available information or ask the user to rephrase.
+
+**Output Format:**
+* Respond concisely and directly in **clean Markdown format**.
+* Avoid any conversational filler or unnecessary text before or after the main answer.
+"""
+        
+        self.SEARCH_QUERY_SYSTEM_PROMPT = """
+You are an AI assistant specialized in analyzing user requests and generating optimal search queries for a vector store. Your sole task is to produce search terms/phrases based on the user's input.
+
+**Decision Rule:**
+* If the user request is a simple greeting (e.g., "Hi", "Hello"), asks about your identity or function (e.g., "What is your name?", "What can you do?"), or is any other message that does not require retrieving specific information from a knowledge base, **your response must be an empty string. Do not generate any search queries.**
+* For all other requests, proceed with generating search queries based on the user's input.
+
+**Processing Instructions (if generating queries):**
+1.  Internally analyze the user's request step-by-step to deeply understand the underlying concepts and information needed.
+2.  If the user's request contains multiple distinct topics, entities, or questions, break them down into individual, manageable components.
+3.  For each identified component or overall concept, formulate **ONE to THREE** concise search queries optimized for retrieving relevant information from a vector database.
+
+**Output Format:**
+* If queries are generated (per the Decision Rule), provide *only* the search queries.
+* List each query on a new line.
+* Do not include any introductory text, explanations, conversational filler, or markdown formatting other than the queries themselves separated by newlines.
+* List each query on a new line.
+* If no queries are generated (per the Decision Rule), the output must be an empty string.
+"""
+
     def new_chat(self, message: str):
         """
         Start a new chat session with the given message.
@@ -50,28 +93,39 @@ class Chatbot:
         """
 
         # Generate search queries, if any
-        query_prompt = "Generate 3 search queries for this user message so that I can optimally search a database. \nUser Message: "
-        response = self.llm.chat(message = query_prompt + message,
-                            model="command-a-03-2025",
-                            search_queries_only=True, # Generate only search queries, not full responses
-                            chat_history=self.chat_history)
-        # print(f"\n\n{'##'*20}\nSearch queries:\n{'##'*20}\n")
+        response = self.llm.chat(message=message,
+                                preamble=self.SEARCH_QUERY_SYSTEM_PROMPT,
+                                model="command-a-03-2025",
+                                search_queries_only=True, # Generate only search queries, not full responses
+                                chat_history=self.chat_history
+                                )
+        print(f"Search queries: {response}")
         search_queries = []
         for query in response.search_queries:
             search_queries.append(query.text)
+            
+        if not search_queries:
+            search_queries = response.text.split("\n")
+            search_queries = [query.strip() for query in search_queries if query.strip()]  # Clean up the queries
+            print(f"Search queries (from text): {search_queries}")
 
         # If there are search queries, retrieve the documents
         if search_queries:
             logger.info("Retrieving information...")
 
             # Retrieve document chunks for each query
+            matching_docs = ([doc for query in search_queries for doc in self.vectorstore.retrieve(query)])
+            ids_set = set()
             documents = []
-            for query in search_queries:
-                documents.extend(self.vectorstore.retrieve(query))
+            for doc in matching_docs: # Take only unique documents
+                if doc['id'] not in ids_set:
+                    documents.append(doc)
+                    ids_set.add(doc['id'])
             print(f"Documents that matched the query: \n{documents}")
 
             # Use document chunks to respond
             response = self.llm.chat_stream(
+                preamble=self.ANSWER_SYSTEM_PROMPT, #.format(context=documents),
                 message=message,
                 model="command-a-03-2025",
                 documents=documents,
@@ -80,11 +134,12 @@ class Chatbot:
 
         else:
             # If no additional context is needed, respond directly
-            docs = self.vectorstore.retrieve(message)
+            # docs = self.vectorstore.retrieve(message)
             response = self.llm.chat_stream(
+                preamble=self.ANSWER_SYSTEM_PROMPT,
                 message=message,
                 model="command-a-03-2025",
-                documents=docs,
+                # documents=docs,
                 chat_history=self.chat_history,
             )
 
@@ -140,7 +195,7 @@ if __name__ == "__main__":
 
     # Start a chat session
     # chatbot.chat("Hi, can I ask questions?")
-    chatbot_response, citations, documents = chatbot.chat("What is the return policy?")
+    chatbot_response, citations, documents = chatbot.chat("Hey, what's your name? What is the return policy?")
     print(f"\n\n{'##'*20}\nChatbot:\n{'##'*20}\n{chatbot_response}")
     print(f"\n\n{'##'*20}\nCitations:\n{'##'*20}\n{citations}")
     print(f"\n\n{'##'*20}\nDocuments:\n{'##'*20}\n{documents}")

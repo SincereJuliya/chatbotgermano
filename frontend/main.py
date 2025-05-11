@@ -9,7 +9,7 @@ import streamlit.components.v1 as components
 from streamlit_modal import Modal
 # import requests # Import requests for API calls
 st.set_page_config(layout="centered",
-                    page_title="Chat App",
+                    page_title="Chatbot Germano",
                     page_icon="🤖",
                     menu_items={
                                 'Get Help': 'https://www.example.com/help', # Placeholder
@@ -95,7 +95,7 @@ def initialize_app():
 
 def render_header() -> None:
     """Render the app header."""
-    st.header(":blue[Nature4AI Chat (FastAPI)] :recycle:", divider=True)
+    st.header(":blue[Chatbot Germano] :recycle:", divider=True)
 
 def render_sidebar() -> None:
     """Render the sidebar with chat sessions."""

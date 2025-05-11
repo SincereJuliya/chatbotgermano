@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 
-from db import crud, models, database
+from backend.db import crud, models, database
 
 router = APIRouter(
     prefix="/citations",

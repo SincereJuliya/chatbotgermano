@@ -2,17 +2,19 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from db.database import create_db_and_tables, populate_initial_citations
-from api import chat, citation # Import router objects
+from backend.db.database import create_db_and_tables #, populate_initial_citations
+from backend.api import chat, citation # Import router objects
 
 import os
 from dotenv import load_dotenv
-load_dotenv(".env")
+env_path = os.path.abspath(".env")
+# print("Loading .env from:", env_path)
+load_dotenv(env_path)
 
 # Create DB tables on startup if they don't exist
 create_db_and_tables()
 # Populate initial citation data if needed
-populate_initial_citations()
+# populate_initial_citations()
 
 
 # Initialize FastAPI app
@@ -21,7 +23,8 @@ app = FastAPI(
     description="API for managing chat sessions, messages, and citations.",
     version="0.1.0",
 )
-_port=os.getenv("PORT", 8000) # Default to 8000 if PORT not set in .env
+BACKEND_PORT= int(os.getenv("BACKEND_PORT", 8000)) # Default to 8000 if PORT not set in .env
+# print(f"Port used: {BACKEND_PORT} \t{os.environ['BACKEND_PORT']}")
 # --- CORS Middleware ---
 # Allow requests from your Streamlit app's origin (e.g., http://localhost:8501)
 # Use "*" for development, but restrict in production!
@@ -54,7 +57,7 @@ async def read_root():
 if __name__ == "__main__":
     # Active .venv and run `python .\backend\main.py`
     import uvicorn
-    uvicorn.run(app, host="localhost", port=_port, log_level="info")
+    uvicorn.run(app, host="localhost", port=BACKEND_PORT, log_level="info")
 
 # --- Run in CMD -> comment all of the `if __name__ == "__main__":` ---
 # uvicorn chat_backend.main:app --reload --port 8000 # --host 0.0.0.0 , etc.
