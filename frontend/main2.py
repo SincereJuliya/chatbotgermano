@@ -50,8 +50,7 @@ def render_text_with_citations(text: str):
     
     # Inject JavaScript to handle the click event on citation spans
     components.html(f"""
-    <div class="custom-text-block">{text}
-    </div>
+    <div class="custom-text-block">{text}</div>
     <script>
         window.onload = function() {{
             const spans = document.querySelectorAll('span[data-citation-id]');
@@ -100,7 +99,7 @@ modal = Modal(
 
 # --- Configuration ---
 _raw_url = st.secrets.get("API_URL", "").strip()
-#_raw_url = "http://13.53.108.0:8000"
+#_raw_url = "http://16.170.40.83:8000"
 
 if _raw_url:
     BACKEND_URL = _raw_url
