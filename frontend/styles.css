@@ -2,14 +2,7 @@
 .stApp {
     background-color: #ffffff !important;
     color-scheme: "Light";
-    color: #1E293B;
-}
-
-.stApp {
-    background-color: #15161a !important;
-    /* Changed from #FFFFFF to softer white */
-    color-scheme: "Dark";
-    color: #1a1d20;
+    color: #13151b;
 }
 
 /* Light theme */
@@ -152,20 +145,6 @@ div[data-testid="stVerticalBlock"] {
     line-height: 1.6;
     color-scheme: "Light";
     font-family: sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    margin: 0 0 16px 0;
-    padding: 0;
-    word-break: break-word;
-}
-
-/* Dark mode override */
-.custom-text-block {
-    color: #e7effc !important;
-    letter-spacing: 0.01em;
-    line-height: 1.6;
-    font-family: sans-serif;
-    color-scheme: "Dark";
     font-size: 14px;
     font-weight: 400;
     margin: 0 0 16px 0;
