@@ -3,6 +3,7 @@
 import os
 import datetime
 import re
+import markdown
 from typing import List
 # import uuid
 from html import escape
@@ -18,6 +19,7 @@ load_dotenv('.env')
 
 # --- Configuration ---
 _raw_url = st.secrets.get("API_URL", "").strip()
+#_raw_url = "http://13.53.108.0:8000"
 
 if _raw_url:
     BACKEND_URL = _raw_url
@@ -229,6 +231,28 @@ def extract_citations(text):
     # Return dict {citation_id: content}
     return {citation_id: content for citation_id, content in matches}
 
+import re
+
+def escape_markdown(text: str):
+    """Escape Markdown formatting but keep bullet points and breaks."""
+    # Remove bold, italics, and other formatting
+    text = re.sub(r'\*\*(.*?)\*\*', r'\1', text)  # Remove bold (e.g., **bold**)
+    text = re.sub(r'\*(.*?)\*', r'\1', text)      # Remove italic (e.g., *italic*)
+    text = re.sub(r'_(.*?)_', r'\1', text)        # Remove italic (e.g., _italic_)
+    
+    # Remove links (e.g., [link](http://example.com))
+    text = re.sub(r'\[.*?\]\(.*?\)', '', text)
+    
+    # Remove headers (e.g., # Heading, ## Subheading, etc.)
+    text = re.sub(r'^[#]+\s?', '', text, flags=re.MULTILINE)
+    
+    # Replace multiple line breaks with a single line break
+    text = re.sub(r'\n+', '\n', text)  # Normalize multiple line breaks
+    
+    return text
+
+
+
 def format_text_with_citations(text: str, citations: List[dict]) -> str:
     """Highlights with HTML the part of the assistant response where that was cited. 
     
@@ -239,19 +263,37 @@ def format_text_with_citations(text: str, citations: List[dict]) -> str:
     Returns:
         str: The formatted text with citations replaced by HTML spans.
     """
+     # Sort citations by descending start index to not mess up positions while replacing
+    citations = sorted(citations, key=lambda c: c['start'], reverse=True)
+    txt = escape_markdown(text)
     # for each citation, get the start and end ints, then replace the text with a span
     for citation in citations:
         citation_id = citation['id']
-        cited_text = citation['text']
         start = citation['start']
         end = citation['end']
-
+        
+        cited_text = citation['text']
+        
         # Create a span with the citation ID and text
-        span_html = f'<span class="citation" data-citation-id="{citation_id}" style="background-color: #ADD8E6; color: black; padding: 2px 4px; border-radius: 3px; border-bottom: 2px dashed #007bff; cursor: pointer;">{escape(cited_text)}[{citation_id}]</span>'
+        #span_html = f'<span class="citation" data-citation-id="{citation_id}"  style="background-color: #ADD8E6; color: black; padding: 2px 4px; border-radius: 3px; border-bottom: 2px dashed #007bff; cursor: pointer;">{cited_text}[{citation_id}]</span>'
 
+        span_html = (
+            f'<span class="citation" data-citation-id="{citation_id}" '
+            f'style="font-size: 14px; background-color: #ADD8E6; color: black; padding: 2px 4px; '
+            f'border-radius: 3px; border-bottom: 2px dashed #007bff; cursor: pointer;">'
+            f'{(cited_text)}[{citation_id}]</span>'
+        )
+        
         # Replace the original text with the span in the content
-        text = text.replace(cited_text[start:end], span_html, 1)
-    return text
+        # txt = txt[:start] + span_html + txt[end:]
+        txt = txt.replace(cited_text, span_html, 1)
+        
+    # Process bullet points: turn `* **` into actual <ul> and <li> elements
+    txt = re.sub(r'^\*\s\*\*(.*?)\*\*', r'<ul><li>\1</li></ul>', txt, flags=re.MULTILINE)
+    # Process bullet points: convert `*` into actual <ul> and <li> HTML elements
+    txt = re.sub(r'^\*\s+(.*)', r'<ul><li>\1</li></ul>', txt, flags=re.MULTILINE)
+
+    return (txt)
     
 def format_text_with_citations2(text):
     """TODO: Remove
