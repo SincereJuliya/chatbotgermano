@@ -90,7 +90,7 @@ def load_css(file_path):
         css = f.read()
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
-if st.get_option("theme.base") == "light":
+if st.get_option("theme.base") == "Light" or st.get_option("theme.color") == "Light" or st.get_option("theme.color") == "light":
     st.markdown(
         """
         <style>
