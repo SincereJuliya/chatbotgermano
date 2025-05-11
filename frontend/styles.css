@@ -129,6 +129,21 @@ div[data-testid="stVerticalBlock"] {
     padding: 0 1rem !important;
 }
 
+[data-theme="dark"] .stText,
+[data-theme="dark"] .stTextInput,
+[data-theme="dark"] .stChatMessage,
+[data-theme="dark"] label,
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+    color: #F8FAFC !important;
+}
+
 /* Dark mode overrides */
 [data-theme="dark"] {
 
@@ -265,6 +280,11 @@ button[id^="trigger-button-"] {
 /* Style for the clickable citation span */
 .citation {
     display: none; /* Completely removes the citation */
+}
+
+
+button[kind="secondary"].stButton>button:first-child[id^='trigger-button-'] {
+    display: none; /* Hides button but keeps space in layout */
 }
 
 button[key^='trigger-button-'] {
