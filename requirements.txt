@@ -1,19 +1,5 @@
 # Frontend (Streamlit UI)
 streamlit
-# python version 3.13.3
-cohere
-hnswlib
-chromadb
-# unstructured[pdf]
-pymupdf # Similar to unstructured, but also helps with highlighting
-langchain
-python-dotenv
-numpy
-pandas
-mysql-connector-python==9.3.0
-sqlalchemy
-# mysqlclient
-sqlparse
 
 streamlit-modal
 streamlit-navigation-bar
