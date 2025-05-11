@@ -2,7 +2,7 @@
 from html import escape
 import os
 import re
-from sqlalchemy import create_engine, Column, String(255), Text, TIMESTAMP, Integer, ForeignKey, MetaData, Table
+from sqlalchemy import create_engine, Column, String, Text, TIMESTAMP, Integer, ForeignKey, MetaData, Table
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.sql import func
 import datetime
