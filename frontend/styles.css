@@ -18,14 +18,14 @@
     border-color: #BBDEFB !important;
 }
 
-/* Shared properties 
+/* Shared properties */
 div[data-testid="stButton"]>button[kind="secondary"][data-testid="baseButton-secondary"] {
     border-radius: 8px !important;
     padding: 10px 15px !important;
     margin: 15px 0 !important;
     width: 100% !important;
     transition: all 0.2s ease !important;
-}*/
+}
 
 /* Chat container */
 .chat-container {
