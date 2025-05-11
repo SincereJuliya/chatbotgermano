@@ -142,7 +142,7 @@ div[data-testid="stVerticalBlock"] {
 [data-theme="dark"] h4,
 [data-theme="dark"] h5,
 [data-theme="dark"] h6 {
-    color: #F8FAFC !important;
+    color: #ffffff !important;
 }
 
 /* Light mode default */
@@ -150,8 +150,6 @@ div[data-testid="stVerticalBlock"] {
     color: #31333F;
     letter-spacing: 0.01em;
     line-height: 1.6;
-    box-sizing: border-box;
-    color-scheme: light;
     font-family: sans-serif;
     font-size: 14px;
     font-weight: 400;
@@ -162,11 +160,9 @@ div[data-testid="stVerticalBlock"] {
 
 /* Dark mode override */
 [data-theme="dark"] .custom-text-block {
-    color: #F8FAFC !important;
+    color: #ffffff !important;
     letter-spacing: 0.01em;
     line-height: 1.6;
-    box-sizing: border-box;
-    color-scheme: dark;
     font-family: sans-serif;
     font-size: 14px;
     font-weight: 400;
