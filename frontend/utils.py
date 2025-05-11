@@ -307,7 +307,16 @@ def format_text_with_citations2(text):
 
         # The visible span - onclick triggers button associated with this specific citation instance
         # The actual button ID will be dynamically created where this is used.
+        style_block = """
+            <style>
+                .citation:hover {
+                    color: #3B82F6 !important; /* new color on hover */
+                }
+            </style>
+            """
+
         span_html = f'''
+             {style_block}
             <span
                 class="citation"
                 data-citation-id="{citation_id}"
