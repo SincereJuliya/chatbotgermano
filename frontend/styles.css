@@ -7,9 +7,17 @@
 }
 
 [data-theme="dark"] .stApp {
-    background-color: #0F172A !important;
-    /* Changed from #FFFFFF to softer white */
+    background-color: #40a6fa !important;
+     /*#0F172A !important;
+     Changed from #FFFFFF to softer white */
     color: #1E293B;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #40a6fa !important;
+        color: #ffffff;
+    }
 }
 
 /* Light theme */
