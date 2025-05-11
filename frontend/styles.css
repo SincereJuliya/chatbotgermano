@@ -159,7 +159,6 @@ div[data-testid="stVerticalBlock"] {
 /* Dark mode override */
 [data-theme="dark"] .custom-text-block {
     color: #F8FAFC !important;
-    color-scheme: dark;
     font-family: sans-serif;
     font-size: 14px;
     line-height: 1.6;
