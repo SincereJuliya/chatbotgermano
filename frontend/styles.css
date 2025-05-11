@@ -144,6 +144,24 @@ div[data-testid="stVerticalBlock"] {
     color: #F8FAFC !important;
 }
 
+/* Light mode default */
+.custom-text-block {
+    color: #31333F;
+    font-family: sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    margin: 0 0 16px 0;
+    padding: 0;
+    word-break: break-word;
+}
+
+/* Dark mode override */
+[data-theme="dark"] .custom-text-block {
+    color: #F8FAFC !important;
+    color-scheme: dark;
+}
+
 /* Dark mode overrides */
 [data-theme="dark"] {
 

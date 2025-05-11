@@ -50,7 +50,7 @@ def render_text_with_citations(text: str):
     
     # Inject JavaScript to handle the click event on citation spans
     components.html(f"""
-    <div style="letter-spacing: 0.01em; line-height: 1.6; box-sizing: border-box; color: rgb(49, 51, 63); color-scheme: light; font-family: sans-serif; font-size: 14px; font-weight: 400; margin-bottom: 16px; margin-left: 0px; margin-right: 0px; margin-top: 0px; padding-bottom: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px; word-break: break-word;">
+    <div class="custom-text-block"
         {text}
     </div>
     <script>
