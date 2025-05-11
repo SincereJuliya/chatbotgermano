@@ -1,7 +1,8 @@
 /* Global background */
 [data-theme="light"] .stApp {
-    background-color: #F8FAFC !important;
-    /* Changed from #FFFFFF to softer white */
+    background-color: #E3F2FD !important; 
+    /* #F8FAFC !important;
+    Changed from #FFFFFF to softer white */
     color: #1E293B;
 }
 
@@ -165,7 +166,7 @@ div[data-testid="stVerticalBlock"] {
     letter-spacing: 0.01em;
     line-height: 1.6;
     box-sizing: border-box;
-    color-scheme: light;
+    color-scheme: dark;
     font-family: sans-serif;
     font-size: 14px;
     font-weight: 400;
