@@ -400,6 +400,8 @@ def display_citation_modal() -> None:
 def main() -> None:
     """The main function to run the Streamlit app.
     """
+    # Add custom CSS
+    load_css("frontend/styles.css")
     # Initialize app (sets config, state vars, fetches initial sessions)
     initialize_app()
 
@@ -410,9 +412,6 @@ def main() -> None:
 
     # Handle Citation Modal Display (check state and render if needed)
     display_citation_modal()
-    
-    # Add custom CSS
-    load_css("frontend/styles.css")
 
 if __name__ == "__main__":
     main()
