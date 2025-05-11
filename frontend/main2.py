@@ -351,8 +351,6 @@ def create_new_chat():
         st.session_state.documents_cache = {}
         st.toast(f"Created '{new_session['title']}'")
         #st.rerun()
-    else:
-        st.error("Failed to create new chat session")
 
 
 def display_citation_modal() -> None:
