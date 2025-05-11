@@ -1,5 +1,5 @@
 /* Global background */
-[data-theme="light"] .stApp {
+.stApp {
     background-color: #e45858 !important;
     /* #F8FAFC !important;
     Changed from #FFFFFF to softer white */
