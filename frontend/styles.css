@@ -1,9 +1,6 @@
 /* Global background */
 .stApp {
-    background-color: #94fff157;
-    color-scheme: "Light";/*#fcfeff !important;
-     #F8FAFC !important;
-    Changed from #FFFFFF to softer white */
+    background-color: #F8FAFC !important;
     color: #1E293B;
 }
 
@@ -151,6 +148,7 @@ div[data-testid="stVerticalBlock"] {
     color: #31333F;
     letter-spacing: 0.01em;
     line-height: 1.6;
+    color-scheme: "Light";
     font-family: sans-serif;
     font-size: 14px;
     font-weight: 400;
@@ -160,11 +158,12 @@ div[data-testid="stVerticalBlock"] {
 }
 
 /* Dark mode override */
-[data-theme="Dark"] .custom-text-block {
+.custom-text-block {
     color: #ffffff !important;
     letter-spacing: 0.01em;
     line-height: 1.6;
     font-family: sans-serif;
+    color-scheme: "Dark";
     font-size: 14px;
     font-weight: 400;
     margin: 0 0 16px 0;
